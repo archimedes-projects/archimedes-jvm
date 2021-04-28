@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.archimedesfw.maven.micronaut</groupId>
+        <artifactId>micronaut-kotlin-parent</artifactId>
+        <version>2.4.2</version>
+    </parent>
+
+    <groupId>io.archimedesfw</groupId>
+    <artifactId>archimedes-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Archimedes Maven pom parent. Not for general use, just to share configuration over the resto of
+        Archimedes modules.
+    </description>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>alejandropg</id>
+            <name>Alejandro Pérez</name>
+        </developer>
+    </developers>
+
+    <properties>
+        <assertj.version>3.19.0</assertj.version>
+        <logback.version>1.2.3</logback.version>
+        <mockito.version>3.9.0</mockito.version>
+        <mockito-kotlin.version>3.1.0</mockito-kotlin.version>
+        <postgresql.version>42.2.20</postgresql.version>
+        <kassava.version>2.1.0</kassava.version>
+
+        <docker-maven-plugin.version>0.35.0</docker-maven-plugin.version>
+        <it.postgresql.image>postgres:10-alpine</it.postgresql.image>
+        <it.postgresql.host>localhost</it.postgresql.host>
+        <it.postgresql.port>5432</it.postgresql.port>
+        <it.postgresql.db>archimedes</it.postgresql.db>
+        <it.postgresql.password>verysecret</it.postgresql.password>
+    </properties>
+
+    <modules>
+        <module>archimedes-bom</module>
+        <module>archimedes-commons-lang</module>
+        <module>archimedes-commons-logging-slf4j</module>
+        <module>archimedes-context-micronaut</module>
+        <module>archimedes-data-tx</module>
+        <module>archimedes-data-tx-action</module>
+        <module>archimedes-data-tx-micronaut</module>
+        <module>archimedes-data-tx-spring</module>
+        <module>archimedes-data</module>
+        <module>archimedes-data-jdbc-micronaut</module>
+        <module>archimedes-data-jdbc-spring</module>
+        <module>archimedes-security</module>
+        <module>archimedes-usecase</module>
+        <module>archimedes-usecase-test</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${docker-maven-plugin.version}</version>
+                    <configuration>
+                        <images>
+                            <image>
+                                <name>${it.postgresql.image}</name>
+                                <run>
+                                    <ports>
+                                        <port>${it.postgresql.port}:5432</port>
+                                    </ports>
+                                    <env>
+                                        <POSTGRES_PASSWORD>${it.postgresql.password}</POSTGRES_PASSWORD>
+                                        <POSTGRES_DB>${it.postgresql.db}</POSTGRES_DB>
+                                    </env>
+                                    <wait>
+                                        <log>database system is ready to accept connections</log>
+                                    </wait>
+                                </run>
+                            </image>
+                        </images>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>start</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>start</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>stop</id>
+                            <phase>post-integration-test</phase>
+                            <goals>
+                                <goal>stop</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>au.com.console</groupId>
+                <artifactId>kassava</artifactId>
+                <version>${kassava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!--
+          - Test dependencies for all child modules
+          -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <!-- Use this dependency instead of mockito-core to mock not `open` classes or functions -->
+            <!-- The use of the "inline" feature has a performance penalty because needs to generate the proxies, -->
+            <!-- but for now we are talking only just of ms and the feature is very useful. -->
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito.kotlin</groupId>
+            <artifactId>mockito-kotlin</artifactId>
+            <version>${mockito-kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micronaut.test</groupId>
+            <artifactId>micronaut-test-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>jcenter.bintray.com</id>
+            <url>https://jcenter.bintray.com</url>
+        </repository>
+    </repositories>
+
+</project>
