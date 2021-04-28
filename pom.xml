@@ -58,7 +58,7 @@
         <module>archimedes-data-tx-action</module>
         <module>archimedes-data-tx-micronaut</module>
         <module>archimedes-data-tx-spring</module>
-        <module>archimedes-data</module>
+        <module>archimedes-data-jdbc</module>
         <module>archimedes-data-jdbc-micronaut</module>
         <module>archimedes-data-jdbc-spring</module>
         <module>archimedes-security</module>
