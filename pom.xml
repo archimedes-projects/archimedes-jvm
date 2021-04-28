@@ -26,6 +26,12 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    <scm>
+        <connection>scm:git:git://github.com/archimedes-projects/archimedes-jvm.git</connection>
+        <developerConnection>scm:git:ssh://github.com:archimedes-projects/archimedes-jvm.git</developerConnection>
+        <tag>main</tag>
+        <url>https://github.com/archimedes-projects/archimedes-jvm</url>
+    </scm>
     <developers>
         <developer>
             <id>alejandropg</id>
