@@ -19,6 +19,7 @@
     <description>Archimedes Maven pom parent. Not for general use, just to share configuration over the resto of
         Archimedes modules.
     </description>
+    <url>https://www.archimedesfw.io/</url>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
