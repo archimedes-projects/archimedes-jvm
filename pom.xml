@@ -48,6 +48,8 @@
         <kassava.version>2.1.0</kassava.version>
 
         <docker-maven-plugin.version>0.35.0</docker-maven-plugin.version>
+        <dokka-maven-plugin.version>1.4.32</dokka-maven-plugin.version>
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <it.postgresql.image>postgres:10-alpine</it.postgresql.image>
         <it.postgresql.host>localhost</it.postgresql.host>
         <it.postgresql.port>5432</it.postgresql.port>
@@ -126,15 +128,42 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>${maven-source-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.dokka</groupId>
+                <artifactId>dokka-maven-plugin</artifactId>
+                <version>${dokka-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>dokka-site</id>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>dokka</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>dokka-javadocJar</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>javadocJar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jdkVersion>${jdk.version}</jdkVersion>
+                    <sourceDirectories>
+                        <dir>${project.basedir}/src/main/kotlin</dir>
+                    </sourceDirectories>
+                </configuration>
             </plugin>
         </plugins>
     </build>
