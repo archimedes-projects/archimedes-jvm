@@ -50,6 +50,7 @@
 
         <docker-maven-plugin.version>0.35.0</docker-maven-plugin.version>
         <dokka-maven-plugin.version>1.4.32</dokka-maven-plugin.version>
+        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <it.postgresql.image>postgres:10-alpine</it.postgresql.image>
         <it.postgresql.host>localhost</it.postgresql.host>
@@ -78,6 +79,11 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                </plugin>
                 <plugin>
                     <groupId>io.fabric8</groupId>
                     <artifactId>docker-maven-plugin</artifactId>
