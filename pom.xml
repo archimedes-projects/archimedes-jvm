@@ -52,6 +52,8 @@
         <dokka-maven-plugin.version>1.4.32</dokka-maven-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+        <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
+
         <it.postgresql.image>postgres:10-alpine</it.postgresql.image>
         <it.postgresql.host>localhost</it.postgresql.host>
         <it.postgresql.port>5432</it.postgresql.port>
@@ -131,6 +133,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${versions-maven-plugin.version}</version>
+                <configuration>
+                    <generateBackupPoms>false</generateBackupPoms>
+                </configuration>
             </plugin>
         </plugins>
     </build>
