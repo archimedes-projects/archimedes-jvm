@@ -2,73 +2,41 @@ package io.archimedesfw.data
 
 import io.archimedesfw.data.Criterion.Operator.EQ
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
-import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
+@TestInstance(PER_CLASS)
 internal class CriteriaTest {
 
-    private val sb = StringBuilder()
-    private val args: MutableList<Any?> = mutableListOf()
+    private val criterion1 = Criterion<Any>("field1", EQ, 1)
+    private val criterion2 = Criterion<Any>("field2", EQ, 2)
+    private val andCriteria = AndCriteria(criterion1)
+    private val orCriteria = OrCriteria(criterion2)
+
+    private fun argumentProvider() = arrayOf(
+        arrayOf(criterion1, "field1 = ?", listOf(1)),
+        arrayOf(andCriteria, "(field1 = ?)", listOf(1)),
+        arrayOf(andCriteria.and(criterion2), "(field1 = ? and field2 = ?)", listOf(1, 2)),
+        arrayOf(andCriteria.and(orCriteria), "(field1 = ? and (field2 = ?))", listOf(1, 2)),
+        arrayOf(andCriteria.or(orCriteria), "((field1 = ?) or (field2 = ?))", listOf(1, 2)),
+        arrayOf(orCriteria, "(field2 = ?)", listOf(2)),
+        arrayOf(orCriteria.or(criterion1), "(field2 = ? or field1 = ?)", listOf(2, 1)),
+        arrayOf(orCriteria.or(andCriteria), "(field2 = ? or (field1 = ?))", listOf(2, 1)),
+        arrayOf(orCriteria.and(andCriteria), "((field2 = ?) and (field1 = ?))", listOf(2, 1))
+    )
+
 
     @ParameterizedTest
     @MethodSource("argumentProvider")
     internal fun and(criteria: Criteria<*>, expectedWhere: String, expectedArgs: List<*>) {
+        val sb = StringBuilder()
+        val args = mutableListOf<Any?>()
+
         criteria.toSql(sb, args)
         assertEquals(expectedWhere, sb.toString())
         assertEquals(expectedArgs, args)
-    }
-
-    private companion object {
-        // All Criteria should be immutable so we can define as constants and reuse in several tests
-        private val CRITERION_1 = Criterion<Any>("field1", EQ, 1)
-        private val CRITERION_2 = Criterion<Any>("field2", EQ, 2)
-        private val AND_CRITERIA =
-            AndCriteria(CRITERION_1)
-        private val OR_CRITERIA =
-            OrCriteria(CRITERION_2)
-
-        @JvmStatic
-        private fun argumentProvider(): List<Arguments> {
-            return listOf(
-                arguments(CRITERION_1, "field1 = ?", listOf(1)),
-
-                arguments(AND_CRITERIA, "(field1 = ?)", listOf(1)),
-                arguments(
-                    AND_CRITERIA.and(
-                        CRITERION_2
-                    ), "(field1 = ? and field2 = ?)", listOf(1, 2)
-                ),
-                arguments(
-                    AND_CRITERIA.and(
-                        OR_CRITERIA
-                    ), "(field1 = ? and (field2 = ?))", listOf(1, 2)
-                ),
-                arguments(
-                    AND_CRITERIA.or(
-                        OR_CRITERIA
-                    ), "((field1 = ?) or (field2 = ?))", listOf(1, 2)
-                ),
-
-                arguments(OR_CRITERIA, "(field2 = ?)", listOf(2)),
-                arguments(
-                    OR_CRITERIA.or(
-                        CRITERION_1
-                    ), "(field2 = ? or field1 = ?)", listOf(2, 1)
-                ),
-                arguments(
-                    OR_CRITERIA.or(
-                        AND_CRITERIA
-                    ), "(field2 = ? or (field1 = ?))", listOf(2, 1)
-                ),
-                arguments(
-                    OR_CRITERIA.and(
-                        AND_CRITERIA
-                    ), "((field2 = ?) and (field1 = ?))", listOf(2, 1)
-                )
-            )
-        }
     }
 
 }
