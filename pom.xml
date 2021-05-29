@@ -41,12 +41,12 @@
     </developers>
 
     <properties>
-        <mockito.version>3.9.0</mockito.version>
-        <mockito-kotlin.version>3.1.0</mockito-kotlin.version>
+        <mockito.version>3.10.0</mockito.version>
+        <mockito-kotlin.version>3.2.0</mockito-kotlin.version>
         <postgresql.version>42.2.20</postgresql.version>
         <kassava.version>2.1.0</kassava.version>
 
-        <docker-maven-plugin.version>0.35.0</docker-maven-plugin.version>
+        <docker-maven-plugin.version>0.36.0</docker-maven-plugin.version>
         <dokka-maven-plugin.version>1.4.32</dokka-maven-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
