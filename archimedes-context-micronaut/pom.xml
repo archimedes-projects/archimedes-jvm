@@ -13,21 +13,19 @@
     <groupId>io.archimedesfw.context</groupId>
     <artifactId>archimedes-context-micronaut</artifactId>
 
-    <name>${project.groupId}:${project.artifactId}</name>
-    <description>Archimedes beans context.</description>
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    <developers>
-        <developer>
-            <id>alejandropg</id>
-            <name>Alejandro Pérez</name>
-        </developer>
-    </developers>
+    <dependencies>
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-runtime</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.archimedesfw.data</groupId>
+            <artifactId>archimedes-data-tx</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
@@ -53,17 +51,20 @@
         </plugins>
     </build>
 
-    <dependencies>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-runtime</artifactId>
-        </dependency>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Archimedes beans context.</description>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>alejandropg</id>
+            <name>Alejandro Pérez</name>
+        </developer>
+    </developers>
 
-        <dependency>
-            <groupId>io.archimedesfw.data</groupId>
-            <artifactId>archimedes-data-tx</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 </project>

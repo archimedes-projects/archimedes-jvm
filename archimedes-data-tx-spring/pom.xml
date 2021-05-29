@@ -13,32 +13,6 @@
     <groupId>io.archimedesfw.data</groupId>
     <artifactId>archimedes-data-tx-spring</artifactId>
 
-    <name>${project.groupId}:${project.artifactId}</name>
-    <description>Archimedes database transaction. Spring implementation.</description>
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    <developers>
-        <developer>
-            <id>alejandropg</id>
-            <name>Alejandro Pérez</name>
-        </developer>
-    </developers>
-
-    <build>
-        <plugins>
-            <plugin>
-                <!-- Run database docker image during integration tests -->
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencies>
         <dependency>
             <groupId>io.archimedesfw.data</groupId>
@@ -71,5 +45,31 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- Run database docker image during integration tests -->
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Archimedes database transaction. Spring implementation.</description>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>alejandropg</id>
+            <name>Alejandro Pérez</name>
+        </developer>
+    </developers>
 
 </project>

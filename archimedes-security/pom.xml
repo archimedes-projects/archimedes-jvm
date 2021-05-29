@@ -13,6 +13,17 @@
     <groupId>io.archimedesfw.security</groupId>
     <artifactId>archimedes-security</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-runtime</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut.security</groupId>
+            <artifactId>micronaut-security</artifactId>
+        </dependency>
+    </dependencies>
+
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Archimedes security.</description>
     <licenses>
@@ -28,16 +39,5 @@
             <name>Alejandro Pérez</name>
         </developer>
     </developers>
-
-    <dependencies>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-runtime</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut.security</groupId>
-            <artifactId>micronaut-security</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>

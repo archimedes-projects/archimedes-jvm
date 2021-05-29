@@ -13,6 +13,14 @@
     <groupId>io.archimedesfw.data</groupId>
     <artifactId>archimedes-data-jdbc</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.archimedesfw.commons</groupId>
+            <artifactId>archimedes-commons-lang</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Archimedes JDBC.</description>
     <licenses>
@@ -28,13 +36,5 @@
             <name>Alejandro Pérez</name>
         </developer>
     </developers>
-
-    <dependencies>
-        <dependency>
-            <groupId>io.archimedesfw.commons</groupId>
-            <artifactId>archimedes-commons-lang</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
 
 </project>

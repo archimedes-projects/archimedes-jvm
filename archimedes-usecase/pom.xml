@@ -13,52 +13,6 @@
     <groupId>io.archimedesfw.usecase</groupId>
     <artifactId>archimedes-usecase</artifactId>
 
-    <name>${project.groupId}:${project.artifactId}</name>
-    <description>Archimedes use case and CQRS.</description>
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    <developers>
-        <developer>
-            <id>alejandropg</id>
-            <name>Alejandro Pérez</name>
-        </developer>
-    </developers>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>test-jar</goal>
-                        </goals>
-                        <configuration>
-                            <excludes>
-                                <!-- Other modules should have not access to resources used to tests this module -->
-                                <exclude>db/**</exclude>
-                                <exclude>*.yml</exclude>
-                                <exclude>*.xml</exclude>
-                            </excludes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <!-- Run database docker image during integration tests -->
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencies>
         <dependency>
             <groupId>io.archimedesfw.commons</groupId>
@@ -132,5 +86,51 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <!-- Other modules should have not access to resources used to tests this module -->
+                                <exclude>db/**</exclude>
+                                <exclude>*.yml</exclude>
+                                <exclude>*.xml</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <!-- Run database docker image during integration tests -->
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Archimedes use case and CQRS.</description>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>alejandropg</id>
+            <name>Alejandro Pérez</name>
+        </developer>
+    </developers>
 
 </project>

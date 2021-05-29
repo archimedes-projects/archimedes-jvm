@@ -10,28 +10,12 @@
         <version>0.0.2-SNAPSHOT</version>
     </parent>
 
-    <name>${project.groupId}:${project.artifactId}</name>
-    <description>Archimedes Maven BOM. Import in your project to manage all Archimedes dependencies.</description>
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    <developers>
-        <developer>
-            <id>alejandropg</id>
-            <name>Alejandro Pérez</name>
-        </developer>
-    </developers>
+    <artifactId>archimedes-bom</artifactId>
+    <packaging>pom</packaging>
 
     <properties>
         <archimedes.version>${project.version}</archimedes.version>
     </properties>
-
-    <artifactId>archimedes-bom</artifactId>
-    <packaging>pom</packaging>
 
     <dependencyManagement>
         <dependencies>
@@ -105,5 +89,21 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Archimedes Maven BOM. Import in your project to manage all Archimedes dependencies.</description>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>alejandropg</id>
+            <name>Alejandro Pérez</name>
+        </developer>
+    </developers>
 
 </project>

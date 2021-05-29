@@ -13,6 +13,21 @@
     <groupId>io.archimedesfw.usecase</groupId>
     <artifactId>archimedes-usecase-test</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.archimedesfw.context</groupId>
+            <artifactId>archimedes-context-micronaut</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+        </dependency>
+        <dependency>
+            <groupId>io.archimedesfw.usecase</groupId>
+            <artifactId>archimedes-usecase</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+        </dependency>
+    </dependencies>
+
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Archimedes use case and CQRS tests utils.</description>
     <licenses>
@@ -28,20 +43,5 @@
             <name>Alejandro Pérez</name>
         </developer>
     </developers>
-
-    <dependencies>
-        <dependency>
-            <groupId>io.archimedesfw.context</groupId>
-            <artifactId>archimedes-context-micronaut</artifactId>
-            <version>${project.version}</version>
-            <type>test-jar</type>
-        </dependency>
-        <dependency>
-            <groupId>io.archimedesfw.usecase</groupId>
-            <artifactId>archimedes-usecase</artifactId>
-            <version>${project.version}</version>
-            <type>test-jar</type>
-        </dependency>
-    </dependencies>
 
 </project>

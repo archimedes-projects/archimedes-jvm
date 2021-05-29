@@ -13,6 +13,13 @@
     <groupId>io.archimedesfw.commons</groupId>
     <artifactId>archimedes-commons-logging-slf4j</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+    </dependencies>
+
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Simple common slf4j utils.</description>
     <licenses>
@@ -28,12 +35,5 @@
             <name>Alejandro Pérez</name>
         </developer>
     </developers>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>
