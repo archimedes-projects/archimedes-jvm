@@ -7,7 +7,7 @@
     <parent>
         <groupId>io.archimedesfw.maven.micronaut</groupId>
         <artifactId>micronaut-kotlin-parent</artifactId>
-        <version>3.0.1</version>
+        <version>3.0.2</version>
     </parent>
 
     <groupId>io.archimedesfw</groupId>
@@ -35,9 +35,11 @@
 
     <modules>
         <module>archimedes-bom</module>
+
         <module>archimedes-commons-lang</module>
         <module>archimedes-commons-logging-slf4j</module>
         <module>archimedes-context-micronaut</module>
+        <module>archimedes-cqrs</module>
         <module>archimedes-data-tx</module>
         <module>archimedes-data-tx-action</module>
         <module>archimedes-data-tx-micronaut</module>
@@ -205,18 +207,6 @@
             <name>Alejandro Pérez</name>
         </developer>
     </developers>
-
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
-        <repository>
-            <!-- Needed to download some dependencies like au.com.console:kassava:jar:2.1.0 -->
-            <id>jcenter</id>
-            <url>https://jcenter.bintray.com</url>
-        </repository>
-    </repositories>
 
     <profiles>
         <profile>
