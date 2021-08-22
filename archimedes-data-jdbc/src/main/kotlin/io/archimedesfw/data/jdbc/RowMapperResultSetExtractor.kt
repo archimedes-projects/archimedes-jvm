@@ -10,10 +10,10 @@ class RowMapperResultSetExtractor<T>(
 
     override fun extractData(rs: ResultSet): List<T> {
         val results = if (rowsExpected > 0) ArrayList<T>(rowsExpected) else ArrayList<T>()
-        var rowNum = 0
+        var rowIndex = 0
         while (rs.next()) {
-            results.add(rowMapper.mapRow(rs, rowNum))
-            rowNum++
+            results.add(rowMapper.mapRow(rs, rowIndex))
+            rowIndex++
         }
         return results
     }

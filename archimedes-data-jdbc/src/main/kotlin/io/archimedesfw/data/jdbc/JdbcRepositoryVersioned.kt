@@ -24,7 +24,7 @@ abstract class JdbcRepositoryVersioned<K, E : EntityVersioned<K>>(
 
         val sql = qry.toSql()
 
-        return jdbc.query(sql, ArgumentPreparedStatementSetter(qry.getArgs()), rowMapper)
+        return jdbc.query(sql, ArgumentPreparedStatementSetter(qry.bindings), rowMapper)
     }
 
     override fun insertRow(entity: E, id: K): GeneratedKeys {
@@ -46,7 +46,10 @@ abstract class JdbcRepositoryVersioned<K, E : EntityVersioned<K>>(
         val expire = QueryBuilder("update ${table.table} set version_end=?").where(byPrevious)
         val sql = expire.toSql()
 
-        jdbc.update(sql, ArgumentPreparedStatementSetter(arrayOf(next.version.start, *expire.getArgs())))
+        val bindings = ArrayList<Any?>(expire.bindings.size + 1)
+        bindings.add(next.version.start)
+        bindings.addAll(expire.bindings)
+        jdbc.update(sql, ArgumentPreparedStatementSetter(bindings))
     }
 
     protected abstract fun setValuesToInsert(ps: PreparedStatement, entity: E, id: K)

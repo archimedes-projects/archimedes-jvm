@@ -4,6 +4,6 @@ import java.sql.ResultSet
 
 fun interface RowMapper<T> {
 
-    fun mapRow(rs: ResultSet, rowNum: Int): T
+    fun mapRow(rs: ResultSet, rowIndex: Int): T
 
 }

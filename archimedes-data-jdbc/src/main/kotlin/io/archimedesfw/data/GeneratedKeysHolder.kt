@@ -1,8 +1,14 @@
 package io.archimedesfw.data
 
+import io.archimedesfw.data.sql.dsl.table.Column
+import io.archimedesfw.data.sql.dsl.table.Table
+
 class GeneratedKeysHolder(
     val columnNames: Array<String>
 ) : GeneratedKeys {
+
+    constructor(table: Table) : this(table.generatedColumns)
+    constructor(columns: List<Column<*>>) : this(columns.map { it.name }.toTypedArray())
 
     private val keysRowsHolder = mutableListOf<Map<String, Any>>()
 

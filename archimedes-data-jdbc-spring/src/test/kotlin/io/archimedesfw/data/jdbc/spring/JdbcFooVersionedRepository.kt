@@ -40,7 +40,7 @@ internal class JdbcFooVersionedRepository(
     }
 
     private class FooVersionedEntityMapper : RowMapper<FooVersionedEntity> {
-        override fun mapRow(rs: ResultSet, rowNum: Int): FooVersionedEntity {
+        override fun mapRow(rs: ResultSet, rowIndex: Int): FooVersionedEntity {
             val id = rs.getInt(1)
             val version = rs.getVersion(2)
             val data = rs.getInt(4)

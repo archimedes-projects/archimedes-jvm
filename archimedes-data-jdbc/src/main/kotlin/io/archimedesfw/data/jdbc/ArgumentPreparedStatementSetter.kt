@@ -3,8 +3,10 @@ package io.archimedesfw.data.jdbc
 import java.sql.PreparedStatement
 
 class ArgumentPreparedStatementSetter(
-    private val arguments: Array<out Any?>
+    private val arguments: List<Any?>
 ) : PreparedStatementSetter {
+
+    constructor(arguments: Array<out Any?>) : this(arguments.asList())
 
     override fun setValues(ps: PreparedStatement) {
         for (i in arguments.indices) {

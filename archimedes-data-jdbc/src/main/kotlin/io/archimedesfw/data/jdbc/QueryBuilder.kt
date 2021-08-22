@@ -5,15 +5,17 @@ import io.archimedesfw.data.Order
 
 class QueryBuilder(select: String) {
 
-    private val sb: StringBuilder = StringBuilder(select)
-    private val args: MutableList<Any?> = mutableListOf()
+    private val sb = StringBuilder(select)
+    private val _bindings = mutableListOf<Any?>()
     private var groupBy: String? = null
     private var orderBy: Order? = null
     private var limit: Int? = null
 
+    val bindings: List<Any?> by ::_bindings
+
     fun where(criteria: Criteria<*>): QueryBuilder {
         sb.append(" where ")
-        criteria.toSql(sb, args)
+        criteria.toSql(sb, _bindings)
         return this
     }
 
@@ -38,11 +40,9 @@ class QueryBuilder(select: String) {
         orderBy?.let { sb.append(" order by ").append(it.by).append(' ').append(it.direction) }
         limit?.let {
             sb.append(" limit ?")
-            args.add(limit)
+            _bindings.add(limit)
         }
         return sb.toString()
     }
-
-    fun getArgs(): Array<Any?> = args.toTypedArray()
 
 }

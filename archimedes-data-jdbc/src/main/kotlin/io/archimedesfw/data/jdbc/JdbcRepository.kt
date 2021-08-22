@@ -22,7 +22,7 @@ abstract class JdbcRepository<K, E : Entity<K>>(
 
         val sql = qry.toSql()
 
-        return jdbc.query(sql, ArgumentPreparedStatementSetter(qry.getArgs()), rowMapper)
+        return jdbc.query(sql, ArgumentPreparedStatementSetter(qry.bindings), rowMapper)
     }
 
     override fun insertRow(entity: E, id: K): GeneratedKeys {
