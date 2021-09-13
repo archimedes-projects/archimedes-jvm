@@ -5,8 +5,8 @@ import io.archimedesfw.data.jdbc.JdbcTemplate
 import io.archimedesfw.data.jdbc.checkRows
 import io.archimedesfw.usecase.audit.AuditLog
 import io.archimedesfw.usecase.audit.persistence.AuditRepository
+import jakarta.inject.Singleton
 import java.sql.ResultSet
-import javax.inject.Singleton
 
 @Singleton
 internal class JdbcAuditRepository(

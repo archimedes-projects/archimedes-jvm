@@ -2,12 +2,12 @@ package io.archimedesfw.context
 
 import io.micronaut.context.exceptions.NonUniqueBeanException
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
+import jakarta.inject.Qualifier
+import jakarta.inject.Singleton
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import javax.inject.Qualifier
-import javax.inject.Singleton
 
 @MicronautTest
 internal class MicronautServiceLocatorIT {

@@ -7,7 +7,7 @@ import io.archimedesfw.usecase.security.SecureInterceptor
 import io.archimedesfw.usecase.transaction.TransactionalInterceptor
 import io.micronaut.context.annotation.Factory
 import io.micronaut.security.utils.SecurityService
-import javax.inject.Singleton
+import jakarta.inject.Singleton
 
 @Factory
 internal class UseCaseBusFactory {

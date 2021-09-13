@@ -12,9 +12,9 @@ import io.archimedesfw.data.jdbc.RowMapper
 import io.archimedesfw.data.jdbc.Table
 import io.archimedesfw.data.jdbc.getVersion
 import io.archimedesfw.data.jdbc.setVersion
+import jakarta.inject.Singleton
 import java.sql.PreparedStatement
 import java.sql.ResultSet
-import javax.inject.Singleton
 
 @Singleton
 internal class JdbcFooVersionedRepository(

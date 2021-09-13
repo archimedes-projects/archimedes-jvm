@@ -5,6 +5,7 @@ import io.archimedesfw.data.EntityInt.Companion.NEW
 import io.archimedesfw.data.Version
 import io.archimedesfw.data.jdbc.spring.JdbcFooVersionedRepository.ById
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
+import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -15,7 +16,6 @@ import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.assertThrows
 import java.time.LocalDateTime
-import javax.inject.Inject
 import javax.sql.DataSource
 
 @MicronautTest(rollback = false)

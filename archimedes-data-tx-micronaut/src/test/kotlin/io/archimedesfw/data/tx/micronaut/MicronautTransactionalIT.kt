@@ -6,13 +6,13 @@ import io.micronaut.data.exceptions.DataAccessException
 import io.micronaut.data.jdbc.runtime.JdbcOperations
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import io.micronaut.transaction.exceptions.UnexpectedRollbackException
+import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
 import org.junit.jupiter.api.assertThrows
-import javax.inject.Inject
 import javax.sql.DataSource
 import kotlin.random.Random
 import kotlin.streams.toList

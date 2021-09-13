@@ -4,7 +4,7 @@ import io.archimedesfw.security.Security
 import io.archimedesfw.usecase.Command
 import io.archimedesfw.usecase.Query
 import io.archimedesfw.usecase.UseCase
-import javax.inject.Singleton
+import jakarta.inject.Singleton
 
 @Singleton
 internal class SecurityRegistry() {

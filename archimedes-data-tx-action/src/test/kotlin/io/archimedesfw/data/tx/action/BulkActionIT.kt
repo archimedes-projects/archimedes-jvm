@@ -2,11 +2,11 @@ package io.archimedesfw.data.tx.action
 
 import io.micronaut.data.jdbc.runtime.JdbcOperations
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
+import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
-import javax.inject.Inject
 import javax.sql.DataSource
 
 @MicronautTest(transactional = false)

@@ -7,8 +7,8 @@ import io.archimedesfw.data.jdbc.PreparedStatementSetter
 import io.archimedesfw.data.jdbc.ResultSetExtractor
 import io.archimedesfw.data.jdbc.extractGeneratedKeys
 import io.micronaut.data.jdbc.runtime.JdbcOperations
+import jakarta.inject.Singleton
 import java.sql.PreparedStatement
-import javax.inject.Singleton
 
 @Singleton
 class MicronautJdbcTemplate(

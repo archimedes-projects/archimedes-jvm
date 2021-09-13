@@ -2,6 +2,7 @@ package io.archimedesfw.data.tx.spring
 
 import io.archimedesfw.data.tx.Transactional
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
+import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -15,7 +16,6 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.transaction.UnexpectedRollbackException
 import java.sql.ResultSet
-import javax.inject.Inject
 import javax.sql.DataSource
 import kotlin.random.Random
 

@@ -3,16 +3,12 @@ package io.archimedesfw.usecase
 import io.archimedesfw.data.tx.Transactional
 import io.archimedesfw.usecase.transaction.TransactionalInterceptor
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
+import jakarta.inject.Inject
+import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation
-import org.junit.jupiter.api.Order
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
-import org.junit.jupiter.api.TestMethodOrder
 import java.time.LocalDateTime
-import javax.inject.Inject
 
 @MicronautTest(transactional = false)
 @TestMethodOrder(OrderAnnotation::class)

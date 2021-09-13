@@ -1,8 +1,8 @@
 package io.archimedesfw.data.tx.spring
 
-import io.micronaut.spring.tx.annotation.Transactional
+import jakarta.inject.Singleton
 import org.springframework.transaction.annotation.Propagation
-import javax.inject.Singleton
+import org.springframework.transaction.annotation.Transactional
 
 /**
  * `open class` because Micronaut needs to do their magic

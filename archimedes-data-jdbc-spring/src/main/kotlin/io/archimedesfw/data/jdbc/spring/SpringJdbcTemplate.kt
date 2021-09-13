@@ -5,7 +5,7 @@ import io.archimedesfw.data.jdbc.BatchPreparedStatementSetter
 import io.archimedesfw.data.jdbc.JdbcTemplate
 import io.archimedesfw.data.jdbc.PreparedStatementSetter
 import io.archimedesfw.data.jdbc.ResultSetExtractor
-import javax.inject.Singleton
+import jakarta.inject.Singleton
 
 @Singleton
 class SpringJdbcTemplate(

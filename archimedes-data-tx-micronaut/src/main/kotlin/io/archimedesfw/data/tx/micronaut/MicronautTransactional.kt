@@ -2,7 +2,7 @@ package io.archimedesfw.data.tx.micronaut
 
 import io.micronaut.transaction.TransactionDefinition
 import io.micronaut.transaction.annotation.ReadOnly
-import javax.inject.Singleton
+import jakarta.inject.Singleton
 import javax.transaction.Transactional
 import javax.transaction.Transactional.TxType.REQUIRED
 import javax.transaction.Transactional.TxType.REQUIRES_NEW

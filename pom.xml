@@ -7,7 +7,7 @@
     <parent>
         <groupId>io.archimedesfw.maven.micronaut</groupId>
         <artifactId>micronaut-kotlin-parent</artifactId>
-        <version>2.5.4</version>
+        <version>3.0.0</version>
     </parent>
 
     <groupId>io.archimedesfw</groupId>
@@ -21,7 +21,7 @@
         <postgresql.version>42.2.20</postgresql.version>
         <kassava.version>2.1.0</kassava.version>
 
-        <docker-maven-plugin.version>0.36.0</docker-maven-plugin.version>
+        <docker-maven-plugin.version>0.37.0</docker-maven-plugin.version>
         <dokka-maven-plugin.version>1.4.32</dokka-maven-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
@@ -42,7 +42,7 @@
         <module>archimedes-data-tx</module>
         <module>archimedes-data-tx-action</module>
         <module>archimedes-data-tx-micronaut</module>
-        <module>archimedes-data-tx-spring</module>
+<!--        <module>archimedes-data-tx-spring</module>-->
         <module>archimedes-data-jdbc</module>
         <module>archimedes-data-jdbc-micronaut</module>
         <module>archimedes-data-jdbc-spring</module>
