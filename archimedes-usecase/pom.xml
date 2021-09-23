@@ -15,6 +15,12 @@
 
     <dependencies>
         <dependency>
+            <!-- Just needed by Kassava -->
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>io.archimedesfw.commons</groupId>
             <artifactId>archimedes-commons-lang</artifactId>
             <version>${project.version}</version>
@@ -38,11 +44,6 @@
             <groupId>io.archimedesfw.security</groupId>
             <artifactId>archimedes-security</artifactId>
             <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>au.com.console</groupId>
-            <artifactId>kassava</artifactId>
         </dependency>
 
         <dependency>

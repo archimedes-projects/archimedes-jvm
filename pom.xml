@@ -19,7 +19,6 @@
         <mockito.version>3.12.4</mockito.version>
         <mockito-kotlin.version>3.2.0</mockito-kotlin.version>
         <postgresql.version>42.2.20</postgresql.version>
-        <kassava.version>2.1.0</kassava.version>
 
         <docker-maven-plugin.version>0.37.0</docker-maven-plugin.version>
         <dokka-maven-plugin.version>1.5.30</dokka-maven-plugin.version>
@@ -53,11 +52,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>au.com.console</groupId>
-                <artifactId>kassava</artifactId>
-                <version>${kassava.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
