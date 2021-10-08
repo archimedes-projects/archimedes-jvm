@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>archimedes-parent</artifactId>
+        <groupId>io.archimedesfw</groupId>
+        <version>0.0.2-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.archimedesfw.cqrs</groupId>
+    <artifactId>archimedes-cqrs</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.archimedesfw.commons</groupId>
+            <artifactId>archimedes-commons-logging-slf4j</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.archimedesfw.security</groupId>
+            <artifactId>archimedes-security</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.archimedesfw.data</groupId>
+            <artifactId>archimedes-data-tx</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.archimedesfw.data</groupId>
+            <artifactId>archimedes-data-jdbc</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Archimedes CQRS.</description>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>alejandropg</id>
+            <name>Alejandro Pérez</name>
+        </developer>
+    </developers>
+
+</project>
