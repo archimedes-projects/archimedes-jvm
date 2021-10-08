@@ -15,9 +15,13 @@ fun PreparedStatement.setIntOrNull(parameterIndex: Int, x: Int?) {
 }
 
 inline fun <reified T : Any> ResultSet.getAny(columnIndex: Int): T = getObject(columnIndex, T::class.java)
-inline fun <reified T : Any?> ResultSet.getAnyOrNull(columnIndex: Int): T? = getObject(columnIndex, T::class.java)
-inline fun ResultSet.getIntOrNull(columnIndex: Int): Int? = getAnyOrNull(columnIndex)
-
 inline fun <reified T : Any> ResultSet.getAny(columnLabel: String): T = getObject(columnLabel, T::class.java)
+
+inline fun <reified T : Any?> ResultSet.getAnyOrNull(columnIndex: Int): T? = getObject(columnIndex, T::class.java)
 inline fun <reified T : Any?> ResultSet.getAnyOrNull(columnLabel: String): T? = getObject(columnLabel, T::class.java)
+
+inline fun ResultSet.getIntOrNull(columnIndex: Int): Int? = getAnyOrNull(columnIndex)
 inline fun ResultSet.getIntOrNull(columnLabel: String): Int? = getAnyOrNull(columnLabel)
+
+inline fun ResultSet.getDoubleOrNull(columnIndex: Int): Double? = getAnyOrNull(columnIndex)
+inline fun ResultSet.getDoubleOrNull(columnLabel: String): Double? = getAnyOrNull(columnLabel)

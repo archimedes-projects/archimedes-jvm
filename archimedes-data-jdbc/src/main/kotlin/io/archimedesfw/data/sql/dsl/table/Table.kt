@@ -5,19 +5,19 @@ open class Table(
     val tableAlias: String = tableName + '_',
 ) {
     private val _columns = mutableListOf<Column<*>>()
+    private val _updatableColumns = mutableListOf<Column<*>>()
     private val _generatedColumns = mutableListOf<Column<*>>()
-    private val _updateableColumns = mutableListOf<Column<*>>()
 
     val columns: List<Column<*>> by ::_columns
+    val updatableColumns: List<Column<*>> by ::_updatableColumns
     val generatedColumns: List<Column<*>> by ::_generatedColumns
-    val updateableColumns: List<Column<*>> by ::_updateableColumns
 
     protected fun <C : Column<*>> add(column: C): C {
         _columns.add(column)
         if (column.isGenerated) {
             _generatedColumns.add(column)
         } else {
-            _updateableColumns.add(column)
+            _updatableColumns.add(column)
         }
         return column
     }

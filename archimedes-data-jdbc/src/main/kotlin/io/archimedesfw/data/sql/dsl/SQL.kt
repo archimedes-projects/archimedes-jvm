@@ -12,7 +12,7 @@ import io.archimedesfw.data.sql.dsl.select.ToSqlSelectVisitor
 class SQL {
 
     companion object {
-        val GENERAL: SqlContext = object : SqlContext {
+        val ANSI: SqlContext = object : SqlContext {
             override val toSqlSelectVisitor: SelectVisitor = ToSqlSelectVisitor()
             override val toSqlPredicateVisitor: PredicateVisitor = ToSqlPredicateVisitor()
             override val toSqlOrderByVisitor: OrderByVisitor = ToSqlOrderByVisitor()

@@ -38,27 +38,27 @@ class SelectBuilder(
         selectQuery.joins.add(join)
     }
 
-    override fun where(predicates: List<Predicate>): JoinStep {
+    override fun where(predicates: List<Predicate>): WhereStep {
         selectQuery.where.predicates.addAll(predicates)
         return this
     }
 
-    override fun where(predicate: Predicate): JoinStep {
+    override fun where(predicate: Predicate): WhereStep {
         selectQuery.where.predicates.add(predicate)
         return this
     }
 
-    override fun orderBy(ordersBy: List<OrderBy>): JoinStep {
+    override fun orderBy(ordersBy: List<OrderBy>): WhereStep {
         selectQuery.orderBy.ordersBy.addAll(ordersBy)
         return this
     }
 
-    override fun orderBy(orderBy: OrderBy): JoinStep {
+    override fun orderBy(orderBy: OrderBy): WhereStep {
         selectQuery.orderBy.ordersBy.add(orderBy)
         return this
     }
 
-    override fun build(): WhereStep {
+    override fun build(): ThreadSafeSelectBuilder {
         selectQuery.build()
         return ThreadSafeSelectBuilder(
             context,

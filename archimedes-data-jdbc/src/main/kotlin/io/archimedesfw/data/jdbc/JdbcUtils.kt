@@ -19,15 +19,15 @@ fun PreparedStatement.extractGeneratedKeys(keysHolder: GeneratedKeysHolder) {
     keysHolder.clear()
 
     while (rs.next()) {
-        val columnValues = LinkedHashMap<String, Any>(columnsCount)
+        val generatedKeys = LinkedHashMap<String, Any>(columnsCount)
 
         for (i in 1..columnsCount) {
-            val name = lookupColumnName(rsmd, i)
+            val calumnName = lookupColumnName(rsmd, i)
             val value = rs.getObject(i)
-            columnValues.putIfAbsent(name, value)
+            generatedKeys[calumnName] = value
         }
 
-        keysHolder.addRow(columnValues)
+        keysHolder.addRow(generatedKeys)
     }
 }
 

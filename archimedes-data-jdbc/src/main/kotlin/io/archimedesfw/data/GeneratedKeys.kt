@@ -2,22 +2,22 @@ package io.archimedesfw.data
 
 interface GeneratedKeys {
 
-    val keysRows: List<Map<String, Any>>
+    val rows: List<Map<String, Any>>
 
     fun singleKey(): Any {
-        check(keysRows.size == 1 && keysRows[0].size == 1) {
-            "The singleKey method should only be used when a single key is returned." +
-                    " The current key entry contains multiple keys: $keysRows"
+        check(rows.size == 1 && rows[0].size == 1) {
+            "The singleKey method should only be used when just a single key is returned by the database." +
+                    " The current rows entries contains multiple keys: $rows"
         }
-        return keysRows[0].values.first()
+        return rows[0].values.first()
     }
 
-    fun singleKeysRow(): Map<String, Any> {
-        check(keysRows.size == 1) {
-            "The singleKeysRow method should only be used when keys for a single row are returned." +
-                    " The current key list contains keys for multiple rows: $keysRows"
+    fun singleRow(): Map<String, Any> {
+        check(rows.size == 1) {
+            "The singleRow method should only be used when keys for a single row are returned by the database." +
+                    " The current rows entries contains keys for multiple rows: $rows"
         }
-        return keysRows[0]
+        return rows[0]
     }
 
 }

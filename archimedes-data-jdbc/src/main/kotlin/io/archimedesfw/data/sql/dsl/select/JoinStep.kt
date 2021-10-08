@@ -9,6 +9,6 @@ interface JoinStep : WhereStep {
     fun innerJoin(table: Table): OngoingJoinStep
     fun outerJoin(table: Table): OngoingJoinStep
 
-    fun build(): WhereStep
+    fun build(): ThreadSafeSelectBuilder
 
 }

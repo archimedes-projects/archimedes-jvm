@@ -2,8 +2,8 @@ package io.archimedesfw.data.jdbc
 
 import java.sql.PreparedStatement
 
-class ConsecutivePreparedStatementSetter(
-    private val setValues: (ConsecutivePreparedStatementSetter) -> Unit
+class PreparedStatementConsecutiveSetter(
+    private val setValues: (PreparedStatementConsecutiveSetter) -> Unit
 ) : PreparedStatementSetter {
 
     private lateinit var ps: PreparedStatement

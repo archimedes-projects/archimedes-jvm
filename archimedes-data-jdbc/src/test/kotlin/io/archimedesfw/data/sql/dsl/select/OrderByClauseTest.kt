@@ -2,7 +2,6 @@ package io.archimedesfw.data.sql.dsl.select
 
 import io.archimedesfw.data.sql.dsl.SQL
 import io.archimedesfw.data.sql.dsl.field.Fields
-import io.archimedesfw.data.sql.dsl.field.Fields.Companion.value
 import io.archimedesfw.data.sql.dsl.select.OrderBy.Order.ASC
 import io.archimedesfw.data.sql.dsl.select.OrderBy.Order.DESC
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -10,7 +9,7 @@ import org.junit.jupiter.api.Test
 
 internal class OrderByClauseTest {
 
-    private val orderBy = OrderByClause("", SQL.GENERAL.toSqlOrderByVisitor)
+    private val orderBy = OrderByClause("", SQL.ANSI.toSqlOrderByVisitor)
     private val sb = StringBuilder()
 
     @Test
@@ -49,7 +48,7 @@ internal class OrderByClauseTest {
 
     @Test
     internal fun `build with static where`() {
-        val staticOrderBy = OrderByClause(" ORDER BY _a ASC", SQL.GENERAL.toSqlOrderByVisitor)
+        val staticOrderBy = OrderByClause(" ORDER BY _a ASC", SQL.ANSI.toSqlOrderByVisitor)
         staticOrderBy.ordersBy.add(FieldOrderBy(Fields.int("ignored_b", "_b"), DESC))
 
         staticOrderBy.build(sb)

@@ -2,7 +2,6 @@ package io.archimedesfw.data.sql.dsl.select
 
 import io.archimedesfw.data.sql.dsl.SQL
 import io.archimedesfw.data.sql.dsl.field.Fields
-import io.archimedesfw.data.sql.dsl.field.Fields.Companion.value
 import io.archimedesfw.data.sql.dsl.predicate.PredicateOperator.Companion.EQ
 import io.archimedesfw.data.sql.dsl.predicate.Predicates.Companion.predicate
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -11,7 +10,7 @@ import org.junit.jupiter.api.Test
 
 internal class WhereClauseTest {
 
-    private val where = WhereClause("", SQL.GENERAL.toSqlPredicateVisitor)
+    private val where = WhereClause("", SQL.ANSI.toSqlPredicateVisitor)
     private val sb = StringBuilder()
     private val bindings = mutableListOf<Any>()
 
@@ -38,7 +37,7 @@ internal class WhereClauseTest {
 
     @Test
     internal fun `build with static where`() {
-        val staticWhere = WhereClause(" WHERE 1=1", SQL.GENERAL.toSqlPredicateVisitor)
+        val staticWhere = WhereClause(" WHERE 1=1", SQL.ANSI.toSqlPredicateVisitor)
         staticWhere.predicates.add(predicate("false"))
 
         staticWhere.build(sb, bindings)
