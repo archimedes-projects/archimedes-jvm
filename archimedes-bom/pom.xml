@@ -35,6 +35,11 @@
                 <version>${archimedes.version}</version>
             </dependency>
             <dependency>
+                <groupId>io.archimedesfw.cqrs</groupId>
+                <artifactId>archimedes-cqrs-micronaut</artifactId>
+                <version>${archimedes.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>io.archimedesfw.data</groupId>
                 <artifactId>archimedes-data-jdbc</artifactId>
                 <version>${archimedes.version}</version>

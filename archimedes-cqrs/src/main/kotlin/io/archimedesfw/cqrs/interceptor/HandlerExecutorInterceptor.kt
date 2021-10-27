@@ -3,7 +3,7 @@ package io.archimedesfw.cqrs.interceptor
 import io.archimedesfw.cqrs.ActionMessage
 import io.archimedesfw.cqrs.handler.ActionHandlerRegistry
 
-class ExecuteHandlerInterceptor(
+class HandlerExecutorInterceptor(
     private val actionHandlerRegistry: ActionHandlerRegistry
 ) : ActionInterceptor {
 

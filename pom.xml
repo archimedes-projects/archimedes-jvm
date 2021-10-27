@@ -7,7 +7,7 @@
     <parent>
         <groupId>io.archimedesfw.maven.micronaut</groupId>
         <artifactId>micronaut-kotlin-parent</artifactId>
-        <version>3.0.2</version>
+        <version>3.1.0</version>
     </parent>
 
     <groupId>io.archimedesfw</groupId>
@@ -16,7 +16,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <mockito.version>3.12.4</mockito.version>
+        <mockito.version>4.0.0</mockito.version>
         <mockito-kotlin.version>3.2.0</mockito-kotlin.version>
         <postgresql.version>42.2.20</postgresql.version>
 
@@ -40,6 +40,7 @@
         <module>archimedes-commons-logging-slf4j</module>
         <module>archimedes-context-micronaut</module>
         <module>archimedes-cqrs</module>
+        <module>archimedes-cqrs-micronaut</module>
         <module>archimedes-data-tx</module>
         <module>archimedes-data-tx-action</module>
         <module>archimedes-data-tx-micronaut</module>
