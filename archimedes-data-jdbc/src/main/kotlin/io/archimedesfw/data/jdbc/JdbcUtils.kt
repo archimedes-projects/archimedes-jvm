@@ -4,14 +4,6 @@ import io.archimedesfw.data.GeneratedKeysHolder
 import java.sql.PreparedStatement
 import java.sql.ResultSetMetaData
 
-fun lookupColumnName(rsmd: ResultSetMetaData, columnIndex: Int): String {
-    var name = rsmd.getColumnLabel(columnIndex)
-    if (name.isEmpty()) {
-        name = rsmd.getColumnName(columnIndex)
-    }
-    return name
-}
-
 fun PreparedStatement.extractGeneratedKeys(keysHolder: GeneratedKeysHolder) {
     val rs = this.generatedKeys
     val rsmd = rs.metaData
@@ -22,13 +14,21 @@ fun PreparedStatement.extractGeneratedKeys(keysHolder: GeneratedKeysHolder) {
         val generatedKeys = LinkedHashMap<String, Any>(columnsCount)
 
         for (i in 1..columnsCount) {
-            val calumnName = lookupColumnName(rsmd, i)
+            val columnName = lookupColumnName(rsmd, i)
             val value = rs.getObject(i)
-            generatedKeys[calumnName] = value
+            generatedKeys[columnName] = value
         }
 
         keysHolder.addRow(generatedKeys)
     }
+}
+
+fun lookupColumnName(rsmd: ResultSetMetaData, columnIndex: Int): String {
+    var name = rsmd.getColumnLabel(columnIndex)
+    if (name.isEmpty()) {
+        name = rsmd.getColumnName(columnIndex)
+    }
+    return name
 }
 
 fun checkRows(expectedCount: Int, actualCount: Int, lazyDetail: (() -> Any)? = null) {
