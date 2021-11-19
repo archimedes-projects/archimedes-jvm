@@ -6,32 +6,31 @@ open class OneToManyResultSetExtractor<K, O, M>(
     private val oneKeyMapper: OneSidePrimaryKeyMapper<K>,
     private val oneMapper: OneSideMapper<O, M>,
     private val manyMapper: ManySideMapper<O, M>,
-    private val rowsExpected: Int = 0
+    private val oneSideExpected: Int = 0
 ) : ResultSetExtractor<List<O>> {
 
     private var rowIndex = 0
-    private val one = mutableMapOf<K, O>()
-    private val many = mutableMapOf<K, MutableList<M>>()
+    private val one = mutableMapOf<K, OneSide<O,M>>()
 
     override fun extractData(rs: ResultSet): List<O> {
-        val results = if (rowsExpected > 0) ArrayList<O>(rowsExpected) else ArrayList<O>()
+        val results = if (oneSideExpected > 0) ArrayList<O>(oneSideExpected) else ArrayList<O>()
         while (rs.next()) {
             val key = oneKeyMapper.mapRow(rs, rowIndex)
-            val manyAccumulator = many.getOrPut(key) { mutableListOf() }
 
-            var oneSideIsNew = false
             val oneSide = one.getOrPut(key) {
-                oneSideIsNew = true
-                oneMapper.mapRow(rs, rowIndex, manyAccumulator)
+                val manyAccumulator = mutableListOf<M>()
+                val one = oneMapper.mapRow(rs, rowIndex, manyAccumulator)
+
+                results.add(one)
+                OneSide(one, manyAccumulator)
             }
 
-            val manySide = manyMapper.mapRow(rs, rowIndex, oneSide)
-            if (manySide != null) manyAccumulator.add(manySide)
-
-            if (oneSideIsNew) results.add(oneSide)
+            val manySide = manyMapper.mapRow(rs, rowIndex, oneSide.one)
+            if (manySide != null) oneSide.manyAccumulator.add(manySide)
 
             rowIndex++
         }
+
         return results
     }
 
@@ -54,5 +53,10 @@ open class OneToManyResultSetExtractor<K, O, M>(
             return any as K
         }
     }
+
+    private class OneSide<O, M>(
+        val one: O,
+        val manyAccumulator: MutableList<M>
+    )
 
 }
