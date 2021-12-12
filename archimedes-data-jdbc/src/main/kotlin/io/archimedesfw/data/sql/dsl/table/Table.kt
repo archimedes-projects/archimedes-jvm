@@ -22,11 +22,14 @@ open class Table(
         return column
     }
 
-    protected fun intColumn(label: String, isGenerated: Boolean = false): IntColumn =
-        add(IntColumn(this, label, isGenerated))
-
     protected fun doubleColumn(label: String, isGenerated: Boolean = false): DoubleColumn =
         add(DoubleColumn(this, label, isGenerated))
+
+    protected fun <E : Enum<E>> enumColumn(label: String, isGenerated: Boolean = false): EnumColumn<E> =
+        add(EnumColumn(this, label, isGenerated))
+
+    protected fun intColumn(label: String, isGenerated: Boolean = false): IntColumn =
+        add(IntColumn(this, label, isGenerated))
 
     protected fun stringColumn(label: String, isGenerated: Boolean = false): StringColumn =
         add(StringColumn(this, label, isGenerated))

@@ -14,8 +14,9 @@ class PreparedStatementConsecutiveSetter(
         setValues(this)
     }
 
-    fun set(value: String): Unit = ps.setString(parameterIndex++, value)
     fun set(value: Double): Unit = ps.setDouble(parameterIndex++, value)
+    fun set(value: Enum<*>): Unit = ps.setString(parameterIndex++, value.name)
     fun set(value: Int): Unit = ps.setInt(parameterIndex++, value)
+    fun set(value: String): Unit = ps.setString(parameterIndex++, value)
 
 }
