@@ -2,6 +2,11 @@ package io.archimedesfw.data.jdbc
 
 import java.sql.ResultSet
 
+/**
+ * Extractor of a one-to-many join.
+ *
+ * **Note that this class is not thread safe.**
+ */
 open class OneToManyResultSetExtractor<K, O, M>(
     private val oneKeyMapper: OneSidePrimaryKeyMapper<K>,
     private val oneMapper: OneSideMapper<O, M>,
