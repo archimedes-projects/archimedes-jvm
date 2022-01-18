@@ -20,6 +20,13 @@ class MicronautSecurityContext(
     override val username: String
         get() = securityService.username().orElseThrow { IllegalStateException("Check failed.") }
 
-    override fun has(permission: String): Boolean = securityService.hasRole(permission)
+//    override val name: String?
+//        get() = securityService.username().orElse(null)
+
+    override fun getName(): String? = securityService.username().orElse(null)
+
+    override fun isAuthenticated(): Boolean = securityService.isAuthenticated
+
+    override fun hasRole(role: String): Boolean = securityService.hasRole(role)
 
 }
