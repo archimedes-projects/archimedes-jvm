@@ -51,7 +51,7 @@ class AuditInterceptor(
     ) = AuditLog(
         LocalDateTime.now(),
         elapsedTime,
-        Security.username,
+        Security.name ?: "ANONYMOUS",
         action.actionMessageName,
         action.actionMessageIsReadOnly,
         success,

@@ -11,10 +11,10 @@ class JdbcAuditRepository(
     private val jdbc: JdbcTemplate,
     tableName: String = "audit_log",
     private val insert: String =
-        "insert into $tableName (timestamp, elapsed_time, user_id, action, read_only, success, arguments, result) " +
+        "insert into $tableName (timestamp, elapsed_time, principal_name, action, read_only, success, arguments, result) " +
                 "values (?, ?, ?, ?, ?, ?, ?, ?)",
     private val selectByUserId: String =
-        "select id, timestamp, elapsed_time, user_id, action, read_only, success, arguments, result " +
+        "select id, timestamp, elapsed_time, principal_name, action, read_only, success, arguments, result " +
                 "from $tableName where user_id=? order by timestamp desc",
     private val actionNameMaxSize: Int = 256,
     private val argumentsMaxSize: Int = 16 * 1024,
@@ -25,7 +25,7 @@ class JdbcAuditRepository(
         val updatedRows = jdbc.update(insert) { ps ->
             ps.setObject(1, auditLog.timestamp)
             ps.setLong(2, auditLog.elapsedTime)
-            ps.setString(3, auditLog.userId)
+            ps.setString(3, auditLog.principalName)
             ps.setString(4, auditLog.action.takeLast(actionNameMaxSize))
             ps.setBoolean(5, auditLog.readOnly)
             ps.setBoolean(6, auditLog.success)

@@ -32,7 +32,7 @@ object Security : SecurityContext {
     override val username: String
         get() = context.username
 
-    override fun getName(): String = context.name
+    override fun getName(): String? = context.name
 
     override fun checkUsername(username: String) {
         context.checkUsername(username)

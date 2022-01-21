@@ -6,7 +6,7 @@ data class AuditLog internal constructor(
     val id: Long,
     val timestamp: LocalDateTime,
     val elapsedTime: Long,
-    val userId: String,
+    val principalName: String,
     val action: String,
     val readOnly: Boolean,
     val success: Boolean,
@@ -17,13 +17,13 @@ data class AuditLog internal constructor(
     constructor(
         timestamp: LocalDateTime,
         elapsedTime: Long,
-        userId: String,
+        principalName: String,
         action: String,
         readOnly: Boolean,
         success: Boolean,
         arguments: String,
         result: String
-    ) : this(NEW, timestamp, elapsedTime, userId, action, readOnly, success, arguments, result)
+    ) : this(NEW, timestamp, elapsedTime, principalName, action, readOnly, success, arguments, result)
 
     private companion object {
         private const val NEW = -1L

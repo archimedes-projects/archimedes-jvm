@@ -33,7 +33,7 @@ fun lookupColumnName(rsmd: ResultSetMetaData, columnIndex: Int): String {
 
 fun checkRows(expectedCount: Int, actualCount: Int, lazyDetail: (() -> Any)? = null) {
     check(expectedCount == actualCount) {
-        val msgBuilder = StringBuilder("Expected rows affected")
+        val msgBuilder = StringBuilder("Expected rows affected ")
             .append(expectedCount).append(" but was ").append(actualCount)
         if (lazyDetail != null) msgBuilder.append(", ").append(lazyDetail())
         msgBuilder.toString()
