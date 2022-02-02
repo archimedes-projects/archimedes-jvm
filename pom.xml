@@ -18,7 +18,7 @@
     <properties>
         <mockito.version>4.0.0</mockito.version>
         <mockito-kotlin.version>4.0.0</mockito-kotlin.version>
-        <postgresql.version>42.2.20</postgresql.version>
+        <postgresql.version>42.2.25</postgresql.version>
 
         <docker-maven-plugin.version>0.38.1</docker-maven-plugin.version>
         <dokka-maven-plugin.version>1.6.0</dokka-maven-plugin.version>
