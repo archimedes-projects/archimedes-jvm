@@ -12,7 +12,7 @@ internal class FakeServiceLocatorTest {
     internal fun return_mock_if_bean_is_not_registered() {
         FakeServiceLocator.of()
 
-        val bean = ServiceLocator.locate<SomeBean>()
+        val bean = ServiceLocator.locate<SomeParentBean>()
 
         val resultOfMockedFun = bean.foo()
         assertNull(resultOfMockedFun)
@@ -22,8 +22,8 @@ internal class FakeServiceLocatorTest {
     internal fun always_return_the_same_mock() {
         FakeServiceLocator.of()
 
-        val bean1 = ServiceLocator.locate<SomeBean>()
-        val bean2 = ServiceLocator.locate<SomeBean>()
+        val bean1 = ServiceLocator.locate<SomeParentBean>()
+        val bean2 = ServiceLocator.locate<SomeParentBean>()
 
         assertSame(bean1, bean2)
     }

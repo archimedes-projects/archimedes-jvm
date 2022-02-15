@@ -1,16 +1,14 @@
 package io.archimedesfw.usecase
 
 import io.archimedesfw.context.ServiceLocator.locate
-import io.archimedesfw.usecase.audit.AuditLog
-import io.archimedesfw.usecase.audit.persistence.jdbc.JdbcAuditRepository
 
 internal class EntityFindQry internal constructor(
-    val byUserId: String,
-    private val repository: JdbcAuditRepository
-) : Query<List<AuditLog>>() {
+    val byName: String,
+    private val repository: EntityRepository
+) : Query<List<Entity>>() {
 
-    constructor(byUserId: String) : this(byUserId, locate())
+    constructor(byName: String) : this(byName, locate())
 
-    override fun run(): List<AuditLog> = repository.findByUserId(byUserId)
+    override fun run(): List<Entity> = repository.findByName(byName)
 
 }

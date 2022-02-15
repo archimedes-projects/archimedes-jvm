@@ -8,7 +8,7 @@ import io.archimedesfw.usecase.LambdaCmd
 import io.archimedesfw.usecase.LambdaQry
 import io.archimedesfw.usecase.TailInterceptor
 import io.archimedesfw.usecase.UseCaseBus
-import io.archimedesfw.usecase.UseCaseTest
+import io.archimedesfw.usecase.audit.AuditLog
 import io.archimedesfw.usecase.audit.AuditableInterceptor
 import io.archimedesfw.usecase.audit.persistence.jdbc.JdbcAuditRepository
 import io.micronaut.data.exceptions.DataAccessException
@@ -65,11 +65,11 @@ internal class TransactionalInterceptorIT {
         // With this we also assert that all the use cases executed by the same Executer in the same thread
         // use the same transaction, so if the inner is rollbacked, also the outer one.
         val innerUseCase = LambdaCmd {
-            repository.save(entityOf("inner never saved"))
+            repository.save(audtiLogOf("inner never saved"))
             throw UnsupportedOperationException("Cannot run inner command")
         }
         val outerUseCase = LambdaCmd {
-            repository.save(entityOf("outer never saved"))
+            repository.save(audtiLogOf("outer never saved"))
             bus(innerUseCase)
         }
 
@@ -113,7 +113,7 @@ internal class TransactionalInterceptorIT {
         val userId = "fail-readonly-transaction-$TS"
         val ex = assertThrows<DataAccessException> {
             Security.runAs(FakeSecurityContext(userId)) {
-                bus(LambdaQry { repository.save(entityOf("never saved")) })
+                bus(LambdaQry { repository.save(audtiLogOf("never saved")) })
             }
         }
 
@@ -123,7 +123,18 @@ internal class TransactionalInterceptorIT {
     private companion object {
         private val TS = LocalDateTime.now()
         private val DUMMY_ID = "dummy ${TransactionalInterceptorIT::class.simpleName} $TS"
-        private fun entityOf(result: String) = UseCaseTest.entityOf(result, DUMMY_ID)
+
+        private fun audtiLogOf(result: String = "dummy result"): AuditLog =
+            AuditLog(
+                LocalDateTime.now(),
+                42,
+                "dummy",
+                "dummy-dummy-dummy",
+                false,
+                true,
+                "dummyOne=1, dummyTwo=2",
+                result
+            )
     }
 
 }
