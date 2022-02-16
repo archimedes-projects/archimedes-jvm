@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Order
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
 import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 
 @MicronautTest(rollback = false)
 @TestMethodOrder(OrderAnnotation::class)
@@ -33,7 +34,7 @@ internal class JdbcAuditRepositoryIT {
     }
 
     private companion object {
-        private val RANDOM = LocalDateTime.now()
+        private val RANDOM = LocalDateTime.now().truncatedTo(ChronoUnit.MICROS)
         private val USER_ID = "User ID $RANDOM"
         private val AUDIT_LOG = AuditLog(RANDOM, 100L, USER_ID, "Use case", true, false, "Arguments", "Result")
     }
