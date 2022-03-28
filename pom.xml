@@ -16,7 +16,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <mockito.version>4.3.1</mockito.version>
+        <mockito.version>4.4.0</mockito.version>
         <mockito-kotlin.version>4.0.0</mockito-kotlin.version>
         <postgresql.version>42.3.3</postgresql.version>
 
@@ -83,9 +83,6 @@
         </dependency>
 
         <dependency>
-            <!-- Use this dependency instead of mockito-core to mock not `open` classes or functions -->
-            <!-- The use of the "inline" feature has a performance penalty because needs to generate the proxies, -->
-            <!-- but for now we are talking only just of ms and the feature is very useful. -->
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>${mockito.version}</version>
