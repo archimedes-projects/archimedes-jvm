@@ -24,7 +24,7 @@
         <dokka-maven-plugin.version>1.6.10</dokka-maven-plugin.version>
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <versions-maven-plugin.version>2.9.0</versions-maven-plugin.version>
+        <versions-maven-plugin.version>2.10.0</versions-maven-plugin.version>
 
         <it.postgresql.image>postgres:10-alpine</it.postgresql.image>
         <it.postgresql.host>localhost</it.postgresql.host>
