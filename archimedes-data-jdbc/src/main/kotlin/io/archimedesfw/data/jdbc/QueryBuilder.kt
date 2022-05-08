@@ -3,6 +3,7 @@ package io.archimedesfw.data.jdbc
 import io.archimedesfw.data.Criteria
 import io.archimedesfw.data.Order
 
+@Deprecated("Use classes from package `io.archimedes.data.sql`")
 class QueryBuilder(select: String) {
 
     private val sb = StringBuilder(select)

@@ -4,6 +4,7 @@ import io.archimedesfw.commons.lang.LazyVar
 import io.archimedesfw.data.Order
 import io.archimedesfw.data.Order.Direction.ASC
 
+@Deprecated("Use classes from package `io.archimedes.data.sql`")
 data class Table(
     val table: String,
     val alias: String,
