@@ -181,7 +181,7 @@
         </plugins>
     </build>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>Archimedes Maven pom parent. Not for general use, just to share configuration over the rest of
         Archimedes modules.
     </description>

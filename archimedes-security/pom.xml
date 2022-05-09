@@ -24,7 +24,7 @@
         </dependency>
     </dependencies>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>Archimedes security.</description>
     <licenses>
         <license>

@@ -28,7 +28,7 @@
         </dependency>
     </dependencies>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>Archimedes use case and CQRS tests utils.</description>
     <licenses>
         <license>

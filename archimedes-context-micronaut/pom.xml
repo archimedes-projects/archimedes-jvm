@@ -51,7 +51,7 @@
         </plugins>
     </build>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>Archimedes beans context.</description>
     <licenses>
         <license>

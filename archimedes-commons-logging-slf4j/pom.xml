@@ -20,7 +20,7 @@
         </dependency>
     </dependencies>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>Simple common slf4j utils.</description>
     <licenses>
         <license>

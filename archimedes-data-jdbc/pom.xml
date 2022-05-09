@@ -21,7 +21,7 @@
         </dependency>
     </dependencies>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>Archimedes JDBC.</description>
     <licenses>
         <license>

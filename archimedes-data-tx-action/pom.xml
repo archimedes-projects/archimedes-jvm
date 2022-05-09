@@ -70,7 +70,7 @@
         </plugins>
     </build>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>Execute a different transactional action over each element of a collection.</description>
     <licenses>
         <license>

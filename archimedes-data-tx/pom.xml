@@ -13,7 +13,7 @@
     <groupId>io.archimedesfw.data</groupId>
     <artifactId>archimedes-data-tx</artifactId>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>Archimedes database transaction.</description>
     <licenses>
         <license>

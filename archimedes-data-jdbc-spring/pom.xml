@@ -67,7 +67,7 @@
         </plugins>
     </build>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>Archimedes JDBC. Spring implementation.</description>
     <licenses>
         <license>

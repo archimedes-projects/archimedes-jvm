@@ -73,7 +73,7 @@
         </plugins>
     </build>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>Archimedes database transaction. Micronaut implementation.</description>
     <licenses>
         <license>

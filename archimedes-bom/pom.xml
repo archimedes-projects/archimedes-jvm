@@ -100,7 +100,7 @@
         </dependencies>
     </dependencyManagement>
 
-    <name>${project.groupId}:${project.artifactId}</name>
+    <name>${project.artifactId}</name>
     <description>Archimedes Maven BOM. Import in your project to manage all Archimedes dependencies.</description>
     <licenses>
         <license>
