@@ -21,7 +21,7 @@
         <postgresql.version>42.3.3</postgresql.version>
 
         <docker-maven-plugin.version>0.39.1</docker-maven-plugin.version>
-        <dokka-maven-plugin.version>1.6.10</dokka-maven-plugin.version>
+        <dokka-maven-plugin.version>1.6.21</dokka-maven-plugin.version>
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <versions-maven-plugin.version>2.10.0</versions-maven-plugin.version>
