@@ -66,7 +66,7 @@ internal class TransactionalInterceptorIT {
         // use the same transaction, so if the inner is rollbacked, also the outer one.
         val innerUseCase = LambdaCmd {
             repository.save(audtiLogOf("inner never saved"))
-            throw UnsupportedOperationException("Cannot run inner command")
+            throw UnsupportedOperationException("Cannot run inner command.")
         }
         val outerUseCase = LambdaCmd {
             repository.save(audtiLogOf("outer never saved"))
@@ -79,7 +79,7 @@ internal class TransactionalInterceptorIT {
             }
         }
 
-        assertEquals("Cannot run inner command", ex.message)
+        assertEquals("Cannot run inner command.", ex.message)
 
         val savedEntities = tx.readOnly { repository.findByUserId(DUMMY_ID) }
         assertTrue(savedEntities.isEmpty())
@@ -96,7 +96,7 @@ internal class TransactionalInterceptorIT {
         assertEquals(false, auditLog.readOnly)
         assertEquals(false, auditLog.success)
         assertEquals("block=() -> kotlin.Any", auditLog.arguments)
-        assertEquals("java.lang.UnsupportedOperationException: Cannot run inner command", auditLog.result)
+        assertEquals("java.lang.UnsupportedOperationException: Cannot run inner command.", auditLog.result)
 
         auditLog = auditLogs[1]
         assertEquals(userId, auditLog.userId)
@@ -104,7 +104,7 @@ internal class TransactionalInterceptorIT {
         assertEquals(false, auditLog.readOnly)
         assertEquals(false, auditLog.success)
         assertEquals("block=() -> kotlin.Any", auditLog.arguments)
-        assertEquals("java.lang.UnsupportedOperationException: Cannot run inner command", auditLog.result)
+        assertEquals("java.lang.UnsupportedOperationException: Cannot run inner command.", auditLog.result)
     }
 
     @Test

@@ -29,14 +29,14 @@ internal class SecurityRegistry() {
         val permissions = getConditions(useCase)
         for (p in permissions) {
             if (!Security.has(p)) {
-                throw RuntimeException("user has not permission")
+                throw RuntimeException("user has not permission.")
             }
         }
     }
 
     private fun getConditions(useCase: UseCase<*>): List<String> {
         return conditions[useCase.javaClass]
-            ?: throw IllegalStateException("Security is not configured for use case ${useCase::class.qualifiedName}")
+            ?: throw IllegalStateException("Security is not configured for use case ${useCase::class.qualifiedName}.")
     }
 
 }

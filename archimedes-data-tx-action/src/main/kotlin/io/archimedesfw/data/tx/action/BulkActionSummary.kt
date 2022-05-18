@@ -16,7 +16,7 @@ open class BulkActionSummary {
         "BulkActionSummary(total=$totalCount, success=$successCount, error=$errorCount, errors=$errors)"
 
     fun successOrThrow(): BulkActionSummary {
-        if (_errors.size > 0) throw BulkActionException(this, "Multiple errors")
+        if (_errors.size > 0) throw BulkActionException(this, "Multiple errors.")
         return this
     }
 

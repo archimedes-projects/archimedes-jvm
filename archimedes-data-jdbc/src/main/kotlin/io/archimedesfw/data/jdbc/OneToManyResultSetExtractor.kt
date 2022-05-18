@@ -54,7 +54,7 @@ open class OneToManyResultSetExtractor<K, O, M>(
     class OneSidePrimaryKeyColumn<K>(private val columnIndex: Int) : OneSidePrimaryKeyMapper<K> {
         override fun mapRow(rs: ResultSet, rowIndex: Int): K {
             val any = rs.getObject(columnIndex)
-                ?: error("one side key is null in row $rowIndex and column $columnIndex")
+                ?: error("One side key is null in row $rowIndex and column $columnIndex.")
             return any as K
         }
     }

@@ -48,15 +48,15 @@ fun Iterable<BigDecimal>.average(): BigDecimal {
         count++
     }
     return if (count == 0) {
-        throw IllegalArgumentException("Cannot get the average of an empty iterable")
+        throw IllegalArgumentException("Cannot get the average of an empty iterable.")
     } else {
         sum / count.toBigDecimal()
     }
 }
 
 fun <T> List<T>.singleOrNone(
-    errorMsgProvider: (actual: List<T>) -> String = { actual ->
-        "Expected one single ${actual[0]?.let { it::class.qualifiedName } ?: "element"} or none, but actually are $actual"
+    lazyMessage: (actual: List<T>) -> String = { actual ->
+        "Expected one single element or none, but actually has ${actual.size}."
     }
 ): T? =
     when (size) {
