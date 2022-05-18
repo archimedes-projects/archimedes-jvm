@@ -1,10 +1,10 @@
 package io.archimedesfw.data.tx.action
 
+import io.archimedesfw.context.ServiceLocator
 import io.archimedesfw.data.tx.Transactional
 import io.archimedesfw.data.tx.action.BulkAction.EachElementTransaction.NO_TX
 import io.archimedesfw.data.tx.action.BulkAction.EachElementTransaction.READONLY_TX
 import io.archimedesfw.data.tx.action.BulkAction.EachElementTransaction.WRITABLE_TX
-import io.archimedesfw.context.ServiceLocator
 import org.slf4j.LoggerFactory
 import java.util.stream.Stream
 
@@ -37,7 +37,7 @@ class BulkAction private constructor(
             eachElementTransaction.decorate(element as Any, action as (Any) -> Unit)
             _summary.addSuccess()
         } catch (ex: Exception) {
-            LOG.error(
+            log.error(
                 "Exception caught by bulk action. DON'T STOP EXECUTION and the exception is added to bulk action summary.",
                 ex
             )
@@ -51,20 +51,20 @@ class BulkAction private constructor(
         identify(element as Any)
     } catch (e: Exception) {
         val msg = "Cannot get identifier of: $element"
-        LOG.error(msg, e)
+        log.error(msg, e)
         msg
     }
 
     private enum class EachElementTransaction(val decorate: (element: Any, action: (Any) -> Unit) -> Unit) {
         NO_TX({ element, action -> action(element) }),
-        READONLY_TX({ element, action -> TX.newReadOnly { action(element) } }),
-        WRITABLE_TX({ element, action -> TX.newWritable { action(element) } })
+        READONLY_TX({ element, action -> tx.newReadOnly { action(element) } }),
+        WRITABLE_TX({ element, action -> tx.newWritable { action(element) } })
     }
 
 
     companion object {
-        private val LOG = LoggerFactory.getLogger(BulkAction::class.java)
-        private val TX = ServiceLocator.locate<Transactional>()
+        private val log = LoggerFactory.getLogger(BulkAction::class.java)
+        private val tx = ServiceLocator.locate<Transactional>()
 
         fun ofNoTx(): BulkAction = BulkAction(NO_TX)
         fun ofReadonlyTx(): BulkAction = BulkAction(READONLY_TX)

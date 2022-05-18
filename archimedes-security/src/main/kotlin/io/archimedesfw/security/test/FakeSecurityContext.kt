@@ -16,7 +16,7 @@ class FakeSecurityContext(
     override fun hasRole(role: String): Boolean = permissions.contains(role)
 
     companion object {
-        val DUMMY_USER_ID: String = "dummy@test.com"
+        const val DUMMY_USER_ID: String = "dummy@test.com"
     }
 
 }
