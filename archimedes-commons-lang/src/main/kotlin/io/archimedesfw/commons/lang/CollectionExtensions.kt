@@ -62,5 +62,11 @@ fun <T> List<T>.singleOrNone(
     when (size) {
         0 -> null
         1 -> this[0]
-        else -> throw IllegalArgumentException(errorMsgProvider(this))
+        else -> throw IllegalArgumentException(lazyMessage(this))
     }
+
+fun <T> List<T>.requireSingle(
+    lazyMessage: (actual: List<T>) -> String = { actual ->
+        "Required exactly one single element, but actually has ${actual.size}."
+    }
+): T = if (size == 1) this[0] else throw IllegalArgumentException(lazyMessage(this))
