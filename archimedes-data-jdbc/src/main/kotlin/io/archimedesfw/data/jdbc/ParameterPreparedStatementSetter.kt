@@ -3,14 +3,16 @@ package io.archimedesfw.data.jdbc
 import io.archimedesfw.data.sql.criteria.parameter.Parameter
 import java.sql.PreparedStatement
 
-class ParameterPreparedStatementSetter(
-    private val parameters: List<Parameter<*>>
+data class ParameterPreparedStatementSetter(
+    private val parameters: List<Parameter<*>>,
+    private val initialIndex: Int = 1
 ) : PreparedStatementSetter {
 
     override fun setValues(ps: PreparedStatement) {
-        for (i in parameters.indices) {
-            val parameter = parameters[i]
-            parameter.set(ps, i + 1)
+        var index = initialIndex
+        parameters.forEach {
+            it.set(ps, index)
+            index++
         }
     }
 
