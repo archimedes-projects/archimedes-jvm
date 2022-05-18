@@ -1,8 +1,8 @@
 package io.archimedesfw.data
 
-interface Entity<K> {
+interface Entity<ID> {
 
-    val id: K
+    val id: ID
 
     fun isNewEntity(): Boolean
 
