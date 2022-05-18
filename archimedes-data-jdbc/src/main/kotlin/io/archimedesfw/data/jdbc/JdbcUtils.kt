@@ -8,7 +8,7 @@ fun PreparedStatement.extractGeneratedKeys(keysHolder: GeneratedKeysHolder) {
     val rs = this.generatedKeys
     val rsmd = rs.metaData
     val columnsCount = rsmd.columnCount
-    keysHolder.clear()
+    keysHolder.rows.clear()
 
     while (rs.next()) {
         val generatedKeys = LinkedHashMap<String, Any>(columnsCount)
@@ -19,7 +19,7 @@ fun PreparedStatement.extractGeneratedKeys(keysHolder: GeneratedKeysHolder) {
             generatedKeys[columnName] = value
         }
 
-        keysHolder.addRow(generatedKeys)
+        keysHolder.rows.add(generatedKeys)
     }
 }
 
