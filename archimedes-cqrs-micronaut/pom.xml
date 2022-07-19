@@ -7,7 +7,7 @@
     <parent>
         <artifactId>archimedes-parent</artifactId>
         <groupId>io.archimedesfw</groupId>
-        <version>0.1.1</version>
+        <version>0.1.2-SNAPSHOT</version>
     </parent>
 
     <groupId>io.archimedesfw.cqrs</groupId>
