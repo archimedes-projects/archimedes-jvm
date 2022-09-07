@@ -50,7 +50,7 @@ internal class AuditableInterceptor(
     ) = AuditLog(
         LocalDateTime.now(),
         elapsedTime,
-        Security.username,
+        Security.name ?: "ANONYMOUS",
         useCase.name,
         useCase.isReadOnly,
         success = result !is Throwable,
