@@ -1,5 +1,5 @@
 package io.archimedesfw.data.sql.criteria
 
-internal class SqlPredicate(
+internal data class SqlPredicate(
     val sql: String
 ) : Predicate
