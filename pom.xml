@@ -22,7 +22,6 @@
 
         <docker-maven-plugin.version>0.40.2</docker-maven-plugin.version>
         <dokka-maven-plugin.version>1.7.20</dokka-maven-plugin.version>
-        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <versions-maven-plugin.version>2.11.0</versions-maven-plugin.version>
 
@@ -117,11 +116,6 @@
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>${maven-jar-plugin.version}</version>
-                </plugin>
                 <plugin>
                     <groupId>io.fabric8</groupId>
                     <artifactId>docker-maven-plugin</artifactId>
