@@ -16,8 +16,8 @@
     <packaging>pom</packaging>
 
     <properties>
-        <mockito.version>4.6.1</mockito.version>
-        <mockito-kotlin.version>4.0.0</mockito-kotlin.version>
+        <mockito.version>4.9.0</mockito.version>
+        <mockito-kotlin.version>4.1.0</mockito-kotlin.version>
         <postgresql.version>42.4.0</postgresql.version>
 
         <docker-maven-plugin.version>0.40.1</docker-maven-plugin.version>
