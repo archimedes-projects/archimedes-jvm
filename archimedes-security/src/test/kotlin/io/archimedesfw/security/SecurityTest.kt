@@ -3,7 +3,9 @@ package io.archimedesfw.security
 import io.archimedesfw.security.test.FakeSecurityContext
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertSame
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 internal class SecurityTest {
 
@@ -27,6 +29,16 @@ internal class SecurityTest {
         }
 
         assertEquals(42, result)
+    }
+
+    @Test
+    internal fun run_as_set_previous_context_on_throw_exception() {
+        assertThrows<Exception> {
+            Security.runAs(fakeSecurityContext) {
+                throw Exception("boom!")
+            }
+        }
+        assertSame(NullSecurityContext, Security.context)
     }
 
 }

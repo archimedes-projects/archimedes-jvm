@@ -17,9 +17,13 @@ object Security : SecurityContext {
     fun <R> runAs(securityContext: SecurityContext, block: () -> R): R {
         val previous = contextHolder.get()
         contextHolder.set(securityContext)
-        val result = block()
-        contextHolder.set(previous)
-        return result
+        try {
+            return block()
+        } catch (ex: Exception) {
+            throw ex
+        } finally {
+            contextHolder.set(previous)
+        }
     }
 
     internal val context: SecurityContext
