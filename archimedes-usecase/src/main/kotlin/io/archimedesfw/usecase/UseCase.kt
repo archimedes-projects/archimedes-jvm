@@ -1,9 +1,9 @@
 package io.archimedesfw.usecase
 
-import au.com.console.kassava.SupportsMixedTypeEquality
-import au.com.console.kassava.kotlinEquals
-import au.com.console.kassava.kotlinHashCode
-import au.com.console.kassava.kotlinToString
+import io.archimedesfw.usecase.thirdparty.kassava.SupportsMixedTypeEquality
+import io.archimedesfw.usecase.thirdparty.kassava.kotlinEquals
+import io.archimedesfw.usecase.thirdparty.kassava.kotlinHashCode
+import io.archimedesfw.usecase.thirdparty.kassava.kotlinToString
 import kotlin.reflect.KProperty1
 
 sealed class UseCase<R> : SupportsMixedTypeEquality {

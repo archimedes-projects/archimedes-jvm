@@ -87,11 +87,6 @@
         </dependency>
 
         <dependency>
-            <groupId>au.com.console</groupId>
-            <artifactId>kassava</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>io.archimedesfw.context</groupId>
             <artifactId>archimedes-context-micronaut</artifactId>
             <version>${project.version}</version>
