@@ -48,6 +48,7 @@
         <module>archimedes-data-jdbc-micronaut</module>
 <!--        <module>archimedes-data-jdbc-spring</module>-->
         <module>archimedes-security</module>
+        <module>archimedes-security-auth-micronaut</module>
         <module>archimedes-usecase</module>
         <module>archimedes-usecase-test</module>
     </modules>

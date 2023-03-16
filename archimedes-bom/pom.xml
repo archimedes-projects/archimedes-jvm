@@ -87,6 +87,11 @@
                 <version>${archimedes.version}</version>
             </dependency>
             <dependency>
+                <groupId>io.archimedesfw.security</groupId>
+                <artifactId>archimedes-security-auth-micronaut</artifactId>
+                <version>${archimedes.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>io.archimedesfw.usecase</groupId>
                 <artifactId>archimedes-usecase</artifactId>
                 <version>${archimedes.version}</version>
