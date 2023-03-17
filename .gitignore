@@ -2,6 +2,7 @@
 target/
 .mvn/wrapper/maven-wrapper.jar
 dependency-reduced-pom.xml
+pom.xml.releaseBackup
 
 ### Gradle ###
 .gradle

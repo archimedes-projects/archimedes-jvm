@@ -23,7 +23,7 @@
         <docker-maven-plugin.version>0.40.2</docker-maven-plugin.version>
         <dokka-maven-plugin.version>1.7.20</dokka-maven-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <versions-maven-plugin.version>2.13.0</versions-maven-plugin.version>
+        <maven-release-plugin.version>3.0.0-M7</maven-release-plugin.version>
 
         <it.postgresql.image>postgres:14-alpine</it.postgresql.image>
         <it.postgresql.host>localhost</it.postgresql.host>
@@ -157,6 +157,16 @@
                         </execution>
                     </executions>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${maven-release-plugin.version}</version>
+                    <configuration>
+                        <tagNameFormat>@{project.version}</tagNameFormat>
+                        <projectVersionPolicyId>SemVerVersionPolicy</projectVersionPolicyId>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -164,14 +174,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>${versions-maven-plugin.version}</version>
-                <configuration>
-                    <generateBackupPoms>false</generateBackupPoms>
-                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -189,8 +191,8 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:git://github.com/archimedes-projects/archimedes-jvm.git</connection>
-        <developerConnection>scm:git:ssh://github.com:archimedes-projects/archimedes-jvm.git</developerConnection>
+        <connection>scm:git:https://github.com/archimedes-projects/archimedes-jvm.git</connection>
+        <developerConnection>scm:git:https://github.com/archimedes-projects/archimedes-jvm.git</developerConnection>
         <tag>main</tag>
         <url>https://github.com/archimedes-projects/archimedes-jvm</url>
     </scm>
