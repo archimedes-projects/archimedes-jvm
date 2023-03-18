@@ -6,8 +6,6 @@ on:
 jobs:
   prepare:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     outputs:
       RELEASE_VERSION: ${{ env.RELEASE_VERSION }}
 
