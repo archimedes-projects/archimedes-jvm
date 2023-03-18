@@ -163,7 +163,8 @@
                     <artifactId>maven-release-plugin</artifactId>
                     <version>${maven-release-plugin.version}</version>
                     <configuration>
-                        <tagNameFormat>@{project.version}</tagNameFormat>
+                        <scmCommentPrefix>[skip ci]</scmCommentPrefix>
+                        <tagNameFormat>v@{project.version}</tagNameFormat>
                         <projectVersionPolicyId>SemVerVersionPolicy</projectVersionPolicyId>
                     </configuration>
                 </plugin>
