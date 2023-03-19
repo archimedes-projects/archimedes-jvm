@@ -8,7 +8,7 @@ on:
         required: true
 
 jobs:
-  prepare:
+  deploy:
     runs-on: ubuntu-latest
     outputs:
       RELEASE_VERSION: ${{ env.RELEASE_VERSION }}
@@ -34,7 +34,7 @@ jobs:
 
       - name: Deploy to Maven Central
         run: |
-          ./mvnw -X -Prelease deploy
+          ./mvnw -Prelease deploy
           echo 'Now you have to wait for the packages to be published in Maven Central.'
           echo 'You can check it in https://repo.maven.apache.org/maven2/io/archimedesfw/context/archimedes-context-micronaut/'
         env:
