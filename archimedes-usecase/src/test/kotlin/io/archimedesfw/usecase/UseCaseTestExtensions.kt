@@ -7,6 +7,7 @@ import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.mockito.verification.VerificationMode
 
 fun <T : UseCase<R>, R> T.fakeRun(): R = this.execute()
 
@@ -41,5 +42,14 @@ fun <T : UseCase<*>, R> T.verifySpiedRun(toBeVerified: UseCase<R>): T {
                 " Before verify you have to prepare the spy with the 'asSpiedRun()' method "
     }
     verify(this).runInternal(toBeVerified)
+    return this
+}
+
+fun <T : UseCase<*>, R> T.verifySpiedRun(toBeVerified: UseCase<R>, mode: VerificationMode): T {
+    check(mockingDetails(this).isSpy) {
+        "This looks like a real object and not a spied UseCase." +
+                " Before verify you have to prepare the spy with the 'asSpiedRun()' method "
+    }
+    verify(this, mode).runInternal(toBeVerified)
     return this
 }
