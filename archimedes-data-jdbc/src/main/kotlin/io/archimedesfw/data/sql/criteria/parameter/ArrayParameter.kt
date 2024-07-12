@@ -18,4 +18,15 @@ class ArrayParameter<T>(
     override fun set(ps: PreparedStatement, index: Int): Unit =
         throw UnsupportedOperationException("Cannot set PreparedStatement of ${this::class.simpleName}.")
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as ArrayParameter<*>
+
+        if (parameters != other.parameters) return false
+
+        return true
+    }
+
 }
