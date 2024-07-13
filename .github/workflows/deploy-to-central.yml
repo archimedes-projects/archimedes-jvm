@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       release_version:
-        description: 'Version to deploy in Maven Central (eg: v1.2.3)'
+        description: 'Tag to deploy in Maven Central (eg: v1.2.3)'
         required: true
 
 jobs:

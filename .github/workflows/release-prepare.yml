@@ -1,7 +1,11 @@
-name: Release
+name: Release - Prepare
 
 on:
   workflow_dispatch:
+    inputs:
+      release_version:
+        description: 'pom.xml version to prepare (eg: 1.2.3 [without v!!!])'
+        required: true
 
 jobs:
   prepare:
@@ -27,6 +31,6 @@ jobs:
 
       - name: Prepare Maven release
         run: |
-          ./mvnw --batch-mode release:prepare
-          RELEASE_VERSION=$(grep -r 'scm.tag=' release.properties | sed 's/scm.tag=//')
-          echo "RELEASE_VERSION=$RELEASE_VERSION" >> $GITHUB_ENV
+          ./mvnw --batch-mode release:prepare -DreleaseVersion=${{ github.event.inputs.release_version }}
+          RELEASE_TAG=$(grep -r 'scm.tag=' release.properties | sed 's/scm.tag=//')
+          echo "RELEASE_VERSION=$RELEASE_TAG" >> $GITHUB_ENV
