@@ -18,10 +18,10 @@
         <mockito-kotlin.version>4.1.0</mockito-kotlin.version>
         <postgresql.version>42.7.2</postgresql.version>
 
-        <docker-maven-plugin.version>0.40.2</docker-maven-plugin.version>
-        <dokka-maven-plugin.version>1.7.20</dokka-maven-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <maven-release-plugin.version>3.0.0-M7</maven-release-plugin.version>
+        <docker-maven-plugin.version>0.44.0</docker-maven-plugin.version>
+        <dokka-maven-plugin.version>1.9.20</dokka-maven-plugin.version>
+        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+        <maven-release-plugin.version>3.1.0</maven-release-plugin.version>
 
         <it.postgresql.image>postgres:14-alpine</it.postgresql.image>
         <it.postgresql.host>localhost</it.postgresql.host>
@@ -256,7 +256,14 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.0.1</version>
+                        <version>3.2.4</version>
+                        <configuration>
+                            <gpgArguments>
+                                <!-- Prevent gpg from using pinentry programs -->
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -270,7 +277,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.13</version>
+                        <version>1.7.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
