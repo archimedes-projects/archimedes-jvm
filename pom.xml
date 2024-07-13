@@ -10,7 +10,7 @@
 
     <groupId>io.archimedesfw</groupId>
     <artifactId>archimedes-parent</artifactId>
-    <version>0.2.1</version>
+    <version>0.3.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -192,7 +192,7 @@
     <scm>
         <connection>scm:git:https://github.com/archimedes-projects/archimedes-jvm.git</connection>
         <developerConnection>scm:git:https://github.com/archimedes-projects/archimedes-jvm.git</developerConnection>
-        <tag>v0.2.1</tag>
+        <tag>main</tag>
         <url>https://github.com/archimedes-projects/archimedes-jvm</url>
     </scm>
     <developers>
