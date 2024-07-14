@@ -4,40 +4,41 @@ import io.micronaut.context.exceptions.NonUniqueBeanException
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Qualifier
 import jakarta.inject.Singleton
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import kotlin.annotation.AnnotationRetention.RUNTIME
 
 @MicronautTest
 internal class MicronautServiceLocatorIT {
 
     @Test
-    fun locate_by_specific_type() {
+    fun `locate by specific type`() {
         val service = ServiceLocator.locate<WithoutQualifier>()
         assertEquals(33, service.methodToImplement())
     }
 
     @Test
-    fun locate_by_annotation() {
+    fun `locate by annotation`() {
         val service1 = ServiceLocator.locateBy<ServiceInterface>(FooQualifier::class.java)
         assertEquals(42, service1.methodToImplement())
     }
 
     @Test
-    fun fail_if_there_are_multiple_candidates() {
+    fun `fail if there are multiple candidates`() {
         val ex = assertThrows<NonUniqueBeanException> {
             ServiceLocator.locate<ServiceInterface>()
         }
-        assertTrue(ex.message!!.startsWith("Multiple possible bean candidates found: ["))
-        assertTrue(ex.message!!.contains("${WithoutQualifier::class.qualifiedName}"))
-        assertTrue(ex.message!!.contains("${WithQualifier::class.qualifiedName}"))
+        assertThat(ex.message).startsWith("Multiple possible bean candidates found: [")
+        assertThat(ex.message).contains("${WithQualifier::class.simpleName}")
+        assertThat(ex.message).contains("${WithoutQualifier::class.simpleName}")
     }
 
 }
 
 @Qualifier
-@Retention(AnnotationRetention.RUNTIME)
+@Retention(RUNTIME)
 internal annotation class FooQualifier
 
 internal interface ServiceInterface {
