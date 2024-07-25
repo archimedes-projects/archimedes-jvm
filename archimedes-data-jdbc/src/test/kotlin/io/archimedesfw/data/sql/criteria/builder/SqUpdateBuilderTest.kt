@@ -21,8 +21,21 @@ internal class SqUpdateBuilderTest {
         assertEquals(SQL, sql.statement)
     }
 
+    @Test
+    fun `update single column in table`() {
+        val update = criteriaBuilder
+            .update(tAuthor)
+            .set(tAuthor.height)
+            .where(tAuthor.id.eq(1))
+
+        val sql = updateBuilder.toSql(update)
+
+        assertEquals(SQL_SINGLE_COLUMN, sql.statement)
+    }
+
     private companion object {
         private const val SQL = "UPDATE author AS author_ SET (name,height) = (?,?) WHERE author_.id=?"
+        private const val SQL_SINGLE_COLUMN = "UPDATE author AS author_ SET height = ? WHERE author_.id=?"
     }
 
 }
