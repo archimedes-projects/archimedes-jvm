@@ -28,4 +28,10 @@ internal class ArrayParameterTest {
         val arr2 = Expressions.parameter(listOf<Int>(1, 2, 3))
         assertEquals(arr1.hashCode(), arr2.hashCode())
     }
+
+    @Test
+    fun `valid sql when empty`() {
+        val arr = Expressions.parameter(emptyList<Int>())
+        assertEquals("(null)", arr.sql)
+    }
 }
