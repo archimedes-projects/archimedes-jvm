@@ -3,6 +3,7 @@ package io.archimedesfw.data.sql.criteria.builder
 import io.archimedesfw.data.sql.BookTable.Companion.tBook
 import io.archimedesfw.data.sql.criteria.Predicates.Companion.predicate
 import io.archimedesfw.data.sql.criteria.eq
+import io.archimedesfw.data.sql.criteria.ne
 import io.archimedesfw.data.sql.criteria.parameter.Parameter
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -45,6 +46,26 @@ internal class SqlWhereBuilderTest {
 
         assertEquals(" WHERE 1=1 AND false", sb.toString())
         assertTrue(parameters.isEmpty())
+    }
+
+    @Test
+    internal fun `build with null comparison`() {
+        where.predicates.add(tBook.pagesCount.eq(null))
+
+        whereBuilder.appendWhere(sb, where, parameters)
+
+        assertEquals(" WHERE book_.pages_count IS NULL", sb.toString())
+        assertEquals(emptyList<Parameter<*>>(), parameters.map { it.value })
+    }
+
+    @Test
+    internal fun `build with negative null comparison`() {
+        where.predicates.add(tBook.pagesCount.ne(null))
+
+        whereBuilder.appendWhere(sb, where, parameters)
+
+        assertEquals(" WHERE book_.pages_count IS NOT NULL", sb.toString())
+        assertEquals(emptyList<Parameter<*>>(), parameters.map { it.value })
     }
 
 }
