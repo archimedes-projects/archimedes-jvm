@@ -32,22 +32,25 @@ class SqlUpdateBuilder(
         }
 
     private fun appendSet(sb: StringBuilder, columns: List<Column<*>>) {
-        sb.append(" SET (")
+        sb.append(" SET ")
+        if (columns.size > 1) sb.append("(")
         for (i in 0 until columns.lastIndex) {
             sb.append(columns[i].name)
             sb.append(',')
         }
         sb.append(columns[columns.lastIndex].name)
-        sb.append(") = ")
+        if (columns.size > 1) sb.append(")")
+        sb.append(" = ")
         appendDefaultValues(sb, columns)
     }
 
     private fun appendDefaultValues(sb: StringBuilder, columns: List<Column<*>>) {
-        sb.append('(')
+        if (columns.size > 1) sb.append('(')
         for (i in 0 until columns.lastIndex) {
             sb.append("?,")
         }
-        sb.append("?)")
+        sb.append("?")
+        if (columns.size > 1) sb.append(")")
     }
 
     private fun appendWhere(sb: StringBuilder, query: CriteriaUpdate, parameters: MutableList<Parameter<*>>) {
