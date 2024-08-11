@@ -6,7 +6,7 @@ import io.archimedesfw.data.sql.criteria.eq
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-internal class SqUpdateBuilderTest {
+internal class SqlUpdateBuilderTest {
 
     private val criteriaBuilder = CriteriaBuilder()
     private val updateBuilder = SqlUpdateBuilder()
@@ -39,4 +39,3 @@ internal class SqUpdateBuilderTest {
     }
 
 }
-
