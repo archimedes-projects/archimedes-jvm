@@ -1,14 +1,6 @@
 package io.archimedesfw.data.sql.criteria.builder
 
-import io.archimedesfw.data.sql.criteria.AndPredicate
-import io.archimedesfw.data.sql.criteria.BinaryPredicate
-import io.archimedesfw.data.sql.criteria.BinaryOperator
-import io.archimedesfw.data.sql.criteria.UnaryPredicate
-import io.archimedesfw.data.sql.criteria.UnaryOperator
-import io.archimedesfw.data.sql.criteria.CompoundPredicate
-import io.archimedesfw.data.sql.criteria.Expression
-import io.archimedesfw.data.sql.criteria.Predicate
-import io.archimedesfw.data.sql.criteria.SqlPredicate
+import io.archimedesfw.data.sql.criteria.*
 import io.archimedesfw.data.sql.criteria.parameter.ArrayParameter
 import io.archimedesfw.data.sql.criteria.parameter.Parameter
 import io.archimedesfw.data.sql.criteria.parameter.ParameterExpression
@@ -48,17 +40,9 @@ class SqlWhereBuilder {
             }
 
             is BinaryPredicate<*> -> {
-                val isNullRight = predicate.right is ParameterExpression && predicate.right.value == null
-
-                if (isNullRight && predicate.operator == BinaryOperator.EQ) {
-                    appendPredicate(sb, UnaryPredicate(predicate.left, UnaryOperator.IS_NULL), parameters)
-                } else if (isNullRight && predicate.operator == BinaryOperator.NE) {
-                    appendPredicate(sb, UnaryPredicate(predicate.left, UnaryOperator.IS_NOT_NULL), parameters)
-                } else {
-                    appendPredicate(sb, predicate.left, parameters)
-                    sb.append(predicate.operator.sql)
-                    appendPredicate(sb, predicate.right, parameters)
-                }
+                appendPredicate(sb, predicate.left, parameters)
+                sb.append(predicate.operator.sql)
+                appendPredicate(sb, predicate.right, parameters)
             }
 
             is UnaryPredicate<*> -> {
