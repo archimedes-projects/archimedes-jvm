@@ -32,6 +32,9 @@ inline fun Expression<Long>.ne(y: Long): Predicate = Predicates.ne(this, y)
 inline fun Expression<Short>.ne(y: Short): Predicate = Predicates.ne(this, y)
 inline fun Expression<String>.ne(y: String): Predicate = Predicates.ne(this, y)
 
+inline fun <T> Expression<T>.isNull(): Predicate = Predicates.isNull(this)
+inline fun <T> Expression<T>.isNotNull(): Predicate = Predicates.isNotNull(this)
+
 // Comparisons for generic operands:
 
 inline fun <T : Comparable<T>> Expression<T>.lt(y: Expression<T>): Predicate = Predicates.lt(this, y)
