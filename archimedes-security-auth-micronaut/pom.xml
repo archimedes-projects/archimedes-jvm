@@ -12,7 +12,7 @@
     <artifactId>archimedes-security-auth-micronaut</artifactId>
 
     <properties>
-        <spring-security-crypto.version>6.0.0</spring-security-crypto.version>
+        <spring-security-crypto.version>6.3.8</spring-security-crypto.version>
     </properties>
 
     <dependencies>
