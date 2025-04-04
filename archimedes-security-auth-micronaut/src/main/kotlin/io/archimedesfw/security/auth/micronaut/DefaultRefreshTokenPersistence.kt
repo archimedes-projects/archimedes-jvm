@@ -25,7 +25,7 @@ internal open class DefaultRefreshTokenPersistence(
     private val refreshTokenService: RefreshTokenService,
     private val refreshTokenAuthenticator: RefreshTokenAuthenticator,
     private val tx: SynchronousTransactionManager<Connection>,
-    @Named(TaskExecutors.IO) private val ioScheduler: Scheduler,
+    @Named(TaskExecutors.BLOCKING) private val blockingScheduler: Scheduler
 ) : RefreshTokenPersistence {
 
     private val log = LoggerFactory.getLogger(DefaultRefreshTokenPersistence::class.java)
@@ -60,6 +60,6 @@ internal open class DefaultRefreshTokenPersistence(
                 log.error("Cannot authenticate with refresh token", th)
                 emitter.error(OauthErrorResponseException(INVALID_GRANT))
             }
-        }.subscribeOn(ioScheduler)
+        }.subscribeOn(blockingScheduler)
 
 }

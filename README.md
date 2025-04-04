@@ -12,11 +12,15 @@ Archimedes's implementation for the Java Virtual Machine (JVM)
 
 To build from source checkout the code and run:
 
-```
-./mvnw clean install
+```shell
+./gradlew clean build
 ```
 
-This will publish the current version to your local Maven cache (usually in ~/.m2/repository)
+To publish the current version to your local Maven cache (usually in ~/.m2/repository)
+
+```shell
+./gradlew publishToMavenLocal
+```
 
 ## Versioning
 

@@ -1,10 +1,11 @@
 package io.archimedesfw.context
 
+import io.archimedesfw.data.tx.NoOpTransactional
 import io.archimedesfw.data.tx.Transactional
 import org.mockito.Mockito
 import kotlin.reflect.KClass
 
-class FakeServiceLocator private constructor(
+public class FakeServiceLocator private constructor(
     private val beans: MutableMap<Class<*>, Any>
 ) : ServiceLocatorHolder {
 
@@ -35,7 +36,7 @@ class FakeServiceLocator private constructor(
     companion object {
         private val EMPTY_MAP = emptyMap<Class<*>, Any>()
         private val DEFAULT_BEANS: Map<Class<*>, Any> = mapOf(
-            Transactional::class.java to FakeTransactional()
+            Transactional::class.java to NoOpTransactional()
         )
 
         fun of(vararg anys: Any): FakeServiceLocator = of(anys.associateBy { it::class })

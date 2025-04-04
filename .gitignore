@@ -8,7 +8,7 @@ pom.xml.releaseBackup
 .gradle
 build/
 bin/
-!gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.jar
 
 ### STS ###
 .apt_generated
@@ -28,3 +28,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Micronaut ###
+.micronaut/

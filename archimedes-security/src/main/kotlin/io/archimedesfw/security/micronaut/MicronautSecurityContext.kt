@@ -17,6 +17,11 @@ class MicronautSecurityContext(
         )
     }
 
+    @Deprecated(
+        "Instead use the more generic property 'name' that mimics java.security.Principal interface.",
+        replaceWith = ReplaceWith("name"),
+        level = DeprecationLevel.WARNING
+    )
     override val username: String
         get() = securityService.username().orElseThrow { IllegalStateException("Check failed.") }
 

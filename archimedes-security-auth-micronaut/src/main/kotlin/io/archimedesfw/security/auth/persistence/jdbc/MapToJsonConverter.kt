@@ -1,21 +1,20 @@
 package io.archimedesfw.security.auth.persistence.jdbc
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import io.micronaut.core.type.Argument
+import io.micronaut.json.JsonMapper
 import jakarta.inject.Singleton
 
 @Singleton
 internal class MapToJsonConverter(
-    private val objectMapper: ObjectMapper
+    private val jsonMapper: JsonMapper
 ) {
 
     internal fun toJson(map: Map<String, Any>): String =
         if (map.isEmpty()) ""
-        else objectMapper.writeValueAsString(map)
+        else jsonMapper.writeValueAsString(map)
 
     internal fun toMap(json: String): Map<String, Any> =
         if (json.isBlank()) emptyMap()
-        else objectMapper.readValue(json)
-
-    private inline fun <reified T> ObjectMapper.readValue(content: String) = readValue(content, T::class.java)
+        else jsonMapper.readValue(json, Argument.mapOf(String::class.java, Any::class.java))
 
 }
