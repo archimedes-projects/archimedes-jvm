@@ -1,0 +1,9 @@
+[versions]
+micronaut="4.8.0"
+spring-security = "6.4.4"
+
+[libraries]
+spring-security-crypto = { module = "org.springframework.security:spring-security-crypto", version.ref = "spring-security" }
+
+[plugins]
+nexusPublish = { id = "io.github.gradle-nexus.publish-plugin", version = "2.0.0" }

@@ -113,7 +113,8 @@ internal class UsernamePasswordJwtAuthenticationIT {
         doReturn(SUBJECT).whenever(refreshTokenAuthenticator).authenticate(refreshToken)
 
         val response = client.toBlocking().exchange(
-            POST("/oauth/access_token", null).cookie(jwtRefreshCookie), Map::class.java
+            POST("/oauth/access_token", null).contentType("application/json").cookie(jwtRefreshCookie),
+            Map::class.java
         )
 
         assertEquals(OK, response.status)

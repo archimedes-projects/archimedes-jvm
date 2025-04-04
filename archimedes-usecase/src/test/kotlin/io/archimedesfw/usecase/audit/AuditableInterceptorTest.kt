@@ -1,6 +1,6 @@
 package io.archimedesfw.usecase.audit
 
-import io.archimedesfw.context.FakeTransactional
+import io.archimedesfw.data.tx.NoOpTransactional
 import io.archimedesfw.security.Security
 import io.archimedesfw.security.test.FakeSecurityContext
 import io.archimedesfw.usecase.Command
@@ -23,7 +23,7 @@ import org.mockito.kotlin.reset
 internal class AuditableInterceptorTest {
 
     private val auditRepository = mock<AuditRepository>()
-    private val auditableInterceptor = AuditableInterceptor(FakeTransactional(), auditRepository, TailInterceptor())
+    private val auditableInterceptor = AuditableInterceptor(NoOpTransactional(), auditRepository, TailInterceptor())
 
     @BeforeEach
     internal fun beforeEach() = reset(auditRepository)

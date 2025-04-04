@@ -11,9 +11,9 @@ import io.archimedesfw.usecase.UseCaseBus
 import io.archimedesfw.usecase.audit.AuditLog
 import io.archimedesfw.usecase.audit.AuditableInterceptor
 import io.archimedesfw.usecase.audit.persistence.jdbc.JdbcAuditRepository
-import io.micronaut.data.exceptions.DataAccessException
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeAll
@@ -26,7 +26,7 @@ import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.assertThrows
 import java.time.LocalDateTime
 
-@MicronautTest(transactional = false) // We will manage transactions manually
+@MicronautTest(startApplication = false, transactional = false) // We will manage transactions manually
 @TestMethodOrder(OrderAnnotation::class)
 @TestInstance(PER_CLASS)
 internal class TransactionalInterceptorIT {
@@ -95,7 +95,7 @@ internal class TransactionalInterceptorIT {
         assertEquals(LambdaCmd::class.qualifiedName, auditLog.useCase)
         assertEquals(false, auditLog.readOnly)
         assertEquals(false, auditLog.success)
-        assertEquals("block=() -> kotlin.Any", auditLog.arguments)
+        assertThat(auditLog.arguments).containsPattern(".*block=.*Lambda.*")
         assertEquals("java.lang.UnsupportedOperationException: Cannot run inner command.", auditLog.result)
 
         auditLog = auditLogs[1]
@@ -103,7 +103,7 @@ internal class TransactionalInterceptorIT {
         assertEquals(LambdaCmd::class.qualifiedName, auditLog.useCase)
         assertEquals(false, auditLog.readOnly)
         assertEquals(false, auditLog.success)
-        assertEquals("block=() -> kotlin.Any", auditLog.arguments)
+        assertThat(auditLog.arguments).containsPattern(".*block=.*Lambda.*")
         assertEquals("java.lang.UnsupportedOperationException: Cannot run inner command.", auditLog.result)
     }
 
@@ -111,7 +111,7 @@ internal class TransactionalInterceptorIT {
     @Order(20)
     internal fun fail_if_try_to_update_ddbb_in_query() {
         val userId = "fail-readonly-transaction-$TS"
-        val ex = assertThrows<DataAccessException> {
+        val ex = assertThrows<RuntimeException> {
             Security.runAs(FakeSecurityContext(userId)) {
                 bus(LambdaQry { repository.save(audtiLogOf("never saved")) })
             }

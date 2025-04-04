@@ -1,40 +1,32 @@
 package io.archimedesfw.data.tx.action
 
-import io.archimedesfw.context.ServiceLocator
-import io.archimedesfw.data.tx.Transactional
-import io.archimedesfw.data.tx.action.BulkAction.EachElementTransaction.NO_TX
-import io.archimedesfw.data.tx.action.BulkAction.EachElementTransaction.READONLY_TX
-import io.archimedesfw.data.tx.action.BulkAction.EachElementTransaction.WRITABLE_TX
 import org.slf4j.LoggerFactory
 import java.util.stream.Stream
 
-class BulkAction private constructor(
-    private val eachElementTransaction: EachElementTransaction,
-    private val identify: (Any) -> String = Any::toString
+public class BulkAction<T>(
+    private val eachElementTransaction: EachElementTransaction<T>,
+    private val elementIdentifier: ElementIdentifier<T> = ToStringElementIdentifier()
 ) {
     private var index = 0
     private val _summary = MutableBulkActionSummary()
-    val summary: BulkActionSummary = _summary
+    public val summary: BulkActionSummary = _summary
 
-    fun <T> identifyElement(identifier: (T) -> String): BulkAction =
-        BulkAction(eachElementTransaction, identifier as (Any) -> String)
-
-    fun <T> forEach(elements: Stream<T>, action: (T) -> Unit): BulkActionSummary {
+    public fun forEach(elements: Stream<T>, action: (T) -> Unit): BulkActionSummary {
         elements.forEach { forOne(it, action) }
         return summary
     }
 
-    fun <T> forEach(elements: Iterable<T>, action: (T) -> Unit): BulkActionSummary =
+    public fun forEach(elements: Iterable<T>, action: (T) -> Unit): BulkActionSummary =
         forEach(elements.iterator(), action)
 
-    fun <T> forEach(elements: Iterator<T>, action: (T) -> Unit): BulkActionSummary {
+    public fun forEach(elements: Iterator<T>, action: (T) -> Unit): BulkActionSummary {
         for (e: T in elements) forOne(e, action)
         return summary
     }
 
-    fun <T> forOne(element: T, action: (T) -> Unit): BulkActionSummary {
+    private fun forOne(element: T, action: (T) -> Unit): BulkActionSummary {
         try {
-            eachElementTransaction.decorate(element as Any, action as (Any) -> Unit)
+            eachElementTransaction.decorate(element, action)
             _summary.addSuccess()
         } catch (ex: Exception) {
             log.error(
@@ -47,28 +39,16 @@ class BulkAction private constructor(
         return summary
     }
 
-    private fun <T> extractId(element: T): String = try {
-        identify(element as Any)
+    private fun extractId(element: T): String = try {
+        elementIdentifier.identify(element)
     } catch (e: Exception) {
         val msg = "Cannot get identifier of: $element"
         log.error(msg, e)
         msg
     }
 
-    private enum class EachElementTransaction(val decorate: (element: Any, action: (Any) -> Unit) -> Unit) {
-        NO_TX({ element, action -> action(element) }),
-        READONLY_TX({ element, action -> tx.newReadOnly { action(element) } }),
-        WRITABLE_TX({ element, action -> tx.newWritable { action(element) } })
-    }
-
-
-    companion object {
+    private companion object {
         private val log = LoggerFactory.getLogger(BulkAction::class.java)
-        private val tx = ServiceLocator.locate<Transactional>()
-
-        fun ofNoTx(): BulkAction = BulkAction(NO_TX)
-        fun ofReadonlyTx(): BulkAction = BulkAction(READONLY_TX)
-        fun ofWritableTx(): BulkAction = BulkAction(WRITABLE_TX)
     }
 
 }

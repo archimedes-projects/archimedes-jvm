@@ -16,4 +16,9 @@ internal class ReactorSchedulerConfig {
     internal fun ioScheduler(@Named(TaskExecutors.IO) executorService: ExecutorService): Scheduler =
         Schedulers.fromExecutorService(executorService)
 
+    @Singleton
+    @Named(TaskExecutors.BLOCKING)
+    internal fun blockingScheduler(@Named(TaskExecutors.BLOCKING) executorService: ExecutorService): Scheduler =
+        Schedulers.fromExecutorService(executorService)
+
 }

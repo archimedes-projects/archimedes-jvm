@@ -13,16 +13,12 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
 import org.junit.jupiter.api.assertThrows
-import javax.sql.DataSource
+import org.junit.jupiter.api.fail
 import kotlin.random.Random
-import kotlin.streams.toList
 
-@MicronautTest(transactional = false)
+@MicronautTest(startApplication = false, transactional = false)
 @TestInstance(PER_CLASS)
-internal open class MicronautTransactionalIT {
-
-    @Inject
-    lateinit var dataSources: List<DataSource>
+internal class MicronautTransactionalIT {
 
     @Inject
     lateinit var tx: Transactional
@@ -30,11 +26,9 @@ internal open class MicronautTransactionalIT {
     @Inject
     lateinit var jdbc: JdbcOperations
 
-
     @Test
-    internal fun writable_failing_outer() {
+    fun `writable failing outer`() {
         val id = Random.nextInt()
-
         assertThrows<IllegalStateException> {
             tx.writable {
                 insert(id, OUTER)
@@ -51,7 +45,7 @@ internal open class MicronautTransactionalIT {
     }
 
     @Test
-    internal fun writable_failing_inner() {
+    fun `writable failing inner`() {
         val id = Random.nextInt()
 
         assertThrows<UnexpectedRollbackException> {
@@ -71,7 +65,7 @@ internal open class MicronautTransactionalIT {
     }
 
     @Test
-    internal fun new_writable_failing_outer() {
+    fun `new writable failing outer`() {
         val id = Random.nextInt()
 
         assertThrows<IllegalStateException> {
@@ -90,7 +84,7 @@ internal open class MicronautTransactionalIT {
     }
 
     @Test
-    internal fun new_writable_failing_inner() {
+    fun `new writable failing inner`() {
         val id = Random.nextInt()
 
         tx.writable {
@@ -108,7 +102,7 @@ internal open class MicronautTransactionalIT {
     }
 
     @Test
-    internal fun readonly() {
+    fun readonly() {
         val ex = assertThrows<DataAccessException> {
             tx.readOnly {
                 insert(1, 1)
@@ -122,7 +116,7 @@ internal open class MicronautTransactionalIT {
     }
 
     @Test
-    internal fun newReadonly() {
+    fun `new readonly`() {
         val ex = assertThrows<DataAccessException> {
             tx.newReadOnly {
                 insert(1, 1)
@@ -154,8 +148,5 @@ internal open class MicronautTransactionalIT {
         private const val OUTER = 1
         private const val INNER = 2
     }
-
-    @Introspected
-    private data class TableDto(val id: Int, val field: Int)
 
 }

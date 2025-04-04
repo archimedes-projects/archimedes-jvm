@@ -7,6 +7,11 @@ class FakeSecurityContext(
     private val permissions: Set<String> = emptySet()
 ) : SecurityContext {
 
+    @Deprecated(
+        "Instead use the more generic property 'name' that mimics java.security.Principal interface.",
+        replaceWith = ReplaceWith("name"),
+        level = DeprecationLevel.WARNING
+    )
     override val username: String = name
 
     override fun getName(): String = name

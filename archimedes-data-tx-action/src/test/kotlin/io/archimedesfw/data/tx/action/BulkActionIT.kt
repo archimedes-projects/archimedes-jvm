@@ -4,11 +4,14 @@ import io.micronaut.data.jdbc.runtime.JdbcOperations
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS
 import javax.sql.DataSource
 
+// We want to test opening several transactions in the same test,
+// so we use `transactional = false` to Micronaut doesn't isolate each test into a single transaction
 @MicronautTest(transactional = false)
 @TestInstance(PER_CLASS)
 internal open class BulkActionIT {
@@ -22,10 +25,16 @@ internal open class BulkActionIT {
     @Inject
     lateinit var tx: io.archimedesfw.data.tx.Transactional
 
+    lateinit var bulkActionFactory: BulkActionFactory
+
+    @BeforeAll
+    internal fun beforeAll() {
+        bulkActionFactory = DefaultBulkActionFactory(tx)
+    }
 
     @Test
-    internal fun execute_each_bulk_action_in_a_different_transaction() {
-        val bulkAction = BulkAction.ofWritableTx()
+    internal fun `execute each bulk action in a different transaction`() {
+        val bulkAction = bulkActionFactory.ofWritableTx<Int>()
 
         bulkAction.forEach((1..2).toList()) {
             val con = dataSource.connection
