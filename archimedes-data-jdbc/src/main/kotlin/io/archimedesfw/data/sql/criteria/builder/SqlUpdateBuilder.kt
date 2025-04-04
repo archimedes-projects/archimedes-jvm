@@ -32,18 +32,28 @@ class SqlUpdateBuilder(
         }
 
     private fun appendSet(sb: StringBuilder, columns: List<Column<*>>) {
+        val lastIndex = columns.lastIndex
+
+        if (columns.size == 1) {
+            sb.append(" SET ")
+            sb.append(columns[lastIndex].name)
+            sb.append(" = ?")
+            return
+        }
+
         sb.append(" SET (")
-        for (i in 0 until columns.lastIndex) {
+
+        for (i in 0 until lastIndex) {
             sb.append(columns[i].name)
             sb.append(',')
         }
-        sb.append(columns[columns.lastIndex].name)
-        sb.append(") = ")
+        sb.append(columns[lastIndex].name)
+
+        sb.append(") = (")
         appendDefaultValues(sb, columns)
     }
 
     private fun appendDefaultValues(sb: StringBuilder, columns: List<Column<*>>) {
-        sb.append('(')
         for (i in 0 until columns.lastIndex) {
             sb.append("?,")
         }

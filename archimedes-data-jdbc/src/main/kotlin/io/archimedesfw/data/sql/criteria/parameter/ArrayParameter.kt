@@ -13,7 +13,9 @@ class ArrayParameter<T>(
     override val alias: String
         get() = throw UnsupportedOperationException("Cannot get alias of ${this::class.simpleName}.")
 
-    override val sql: String = parameters.joinToString(prefix = "(", postfix = ")") { "?" }
+    override val sql: String =
+        if (parameters.isNotEmpty()) parameters.joinToString(prefix = "(", postfix = ")") { "?" }
+        else "(null)"
 
     override fun set(ps: PreparedStatement, index: Int): Unit =
         throw UnsupportedOperationException("Cannot set PreparedStatement of ${this::class.simpleName}.")
