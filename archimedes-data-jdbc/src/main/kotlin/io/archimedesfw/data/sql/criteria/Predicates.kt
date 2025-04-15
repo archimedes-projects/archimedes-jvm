@@ -11,6 +11,8 @@ import io.archimedesfw.data.sql.criteria.BinaryOperator.Companion.NE
 import io.archimedesfw.data.sql.criteria.Expressions.Companion.parameter
 import io.archimedesfw.data.sql.criteria.Expressions.Companion.parameterAny
 import io.archimedesfw.data.sql.criteria.Expressions.Companion.parameterArray
+import io.archimedesfw.data.sql.criteria.UnaryOperator.Companion.IS_NOT_NULL
+import io.archimedesfw.data.sql.criteria.UnaryOperator.Companion.IS_NULL
 import java.math.BigDecimal
 
 class Predicates {
@@ -21,6 +23,9 @@ class Predicates {
 
         fun <T> predicate(left: Expression<T>, operator: BinaryOperator, right: Expression<T>): Predicate =
             BinaryPredicate(left, operator, right)
+
+        fun <T> predicate(x: Expression<T>, operator: UnaryOperator): Predicate =
+            UnaryPredicate(x, operator)
 
         fun and(vararg predicate: Predicate): Predicate = and(predicate.asList())
         fun and(predicates: List<Predicate>): Predicate = AndPredicate(predicates)
@@ -57,6 +62,9 @@ class Predicates {
         inline fun ne(x: Expression<Long>, y: Long): Predicate = ne(x, parameter(y))
         inline fun ne(x: Expression<Short>, y: Short): Predicate = ne(x, parameter(y))
         inline fun ne(x: Expression<String>, y: String): Predicate = ne(x, parameter(y))
+
+        inline fun <T> isNull(x: Expression<T>): Predicate = predicate(x, IS_NULL)
+        inline fun <T> isNotNull(x: Expression<T>): Predicate = predicate(x, IS_NOT_NULL)
 
         // Comparisons for generic operands:
 

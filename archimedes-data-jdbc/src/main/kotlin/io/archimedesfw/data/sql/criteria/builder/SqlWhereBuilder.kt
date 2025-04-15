@@ -1,11 +1,6 @@
 package io.archimedesfw.data.sql.criteria.builder
 
-import io.archimedesfw.data.sql.criteria.AndPredicate
-import io.archimedesfw.data.sql.criteria.BinaryPredicate
-import io.archimedesfw.data.sql.criteria.CompoundPredicate
-import io.archimedesfw.data.sql.criteria.Expression
-import io.archimedesfw.data.sql.criteria.Predicate
-import io.archimedesfw.data.sql.criteria.SqlPredicate
+import io.archimedesfw.data.sql.criteria.*
 import io.archimedesfw.data.sql.criteria.parameter.ArrayParameter
 import io.archimedesfw.data.sql.criteria.parameter.Parameter
 import io.archimedesfw.data.sql.criteria.parameter.ParameterExpression
@@ -46,16 +41,13 @@ class SqlWhereBuilder {
 
             is BinaryPredicate<*> -> {
                 appendPredicate(sb, predicate.left, parameters)
+                sb.append(predicate.operator.sql)
+                appendPredicate(sb, predicate.right, parameters)
+            }
 
-                // TODO crear predicado específico para el is null e is not null
-//                if (predicate.right is ParameterExpression && predicate.right.value == null) {
-//                    sb.append(" IS ")
-//                    if (predicate.operator == BinaryOperator.NE) sb.append("NOT ")
-//                    sb.append("null")
-//                } else {
-                    sb.append(predicate.operator.sql)
-                    appendPredicate(sb, predicate.right, parameters)
-//                }
+            is UnaryPredicate<*> -> {
+                appendPredicate(sb, predicate.value, parameters)
+                sb.append(predicate.operator.sql)
             }
 
             is SqlPredicate -> sb.append(predicate.sql)
